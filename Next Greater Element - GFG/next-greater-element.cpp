@@ -16,7 +16,7 @@ class Solution {
        
        while(!s.empty() && i>=0)
        {
-           if(s.top()>arr[i])
+           if(s.top()>arr[i] || s.size() == 1)
            {
                ans.push_back(s.top());
                s.push(arr[i]);
@@ -24,16 +24,7 @@ class Solution {
            }
            else if(s.top()<arr[i])
            {
-               if(s.size() == 1)
-               {
-                   ans.push_back(-1);
-                   s.push(arr[i]);
-                   i--;
-               }
-               else
-               {
-                   s.pop();
-               }
+               s.pop();
            }
        }
        reverse(ans.begin(),ans.end());
