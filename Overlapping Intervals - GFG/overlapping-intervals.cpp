@@ -5,13 +5,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-static bool cmp(vector<int>a,vector<int>b)
-{
-    return (a[0] < b[0]);
-}
-
-
-    vector<vector<int>> overlappedInterval(vector<vector<int>>& intervals) {
+ vector<vector<int>> overlappedInterval(vector<vector<int>>& intervals) {
          sort(intervals.begin(),intervals.end());
          
          int res = 0;
