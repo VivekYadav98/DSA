@@ -20,12 +20,11 @@ public:
                 s.push(nums[i]);
                 i--;
             }
-            else
+            else if(s.top()<=nums[i])
             {
                     s.pop();
             }
         }
-        
         reverse(temp.begin(),temp.end());
         vector<int>ans;
         for(int i=0;i<n;i++)
