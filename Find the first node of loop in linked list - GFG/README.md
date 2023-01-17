@@ -1,5 +1,5 @@
 # Find the first node of loop in linked list
-## Medium
+## Easy
 <div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a singly linked list of&nbsp;<strong>N</strong>&nbsp;nodes. Find the first node of the loop if the&nbsp;linked list has a loop. If a loop is present return the node data of the&nbsp;first node of the loop else return -1.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
