@@ -9,11 +9,6 @@ class Solution{
 	public:
 	vector<int> findMaxGuests(int Entry[], int Exit[], int N)
 	{
-	    if(N == 1)
-	    {
-	        return {1,Entry[0]};
-	    }
-	    
 	   sort(Entry,Entry+N);
 	   sort(Exit,Exit+N);
 	   
