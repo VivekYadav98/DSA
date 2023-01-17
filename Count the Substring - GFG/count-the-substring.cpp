@@ -104,7 +104,7 @@ public:
 
       reverse(v.begin(), v.end());
 
-      mergesort(v, 0, n - 1);
+      mergesort(v, 0, n-1);
 
       ans += inversion;
 
