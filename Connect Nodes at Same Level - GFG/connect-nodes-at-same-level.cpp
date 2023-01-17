@@ -140,7 +140,6 @@ class Solution
     //Function to connect nodes at same level.
     void connect(Node *root)
     {
-       vector<int>ans;
         queue<Node*>q;
         q.push(root);
         
