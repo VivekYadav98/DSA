@@ -11,10 +11,10 @@ class Solution{
 public:
     int solve(string S1,string S2,int n,int m)
     {
-       if(n==0 && m==0 || m==0)
-       {
-           return 1;
-       }
+           if(m==0)
+           {
+               return 1;
+           }
         
         if(n == 0)
         {
