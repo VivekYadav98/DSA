@@ -120,15 +120,14 @@ class Solution
         }
         
         int val = A[index];
+        index++;
         if(val == -1)
         {
             return NULL;
         }
         
         Node* root = new Node(val);
-        index++;
         root->left = deSerialize(A);
-        index++;
         root->right = deSerialize(A);
         return root;
     }
