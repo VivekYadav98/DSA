@@ -1,6 +1,6 @@
 class Solution {
 public:
-     bool safe(int i,int j,int n,int m)
+      bool safe(int i,int j,int n,int m)
   {
       if(i<m && i>=0 && j<n && j>=0)
       {
