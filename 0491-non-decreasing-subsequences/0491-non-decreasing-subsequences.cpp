@@ -13,15 +13,12 @@ public:
         
         solve(index+1,nums,output,s);
         
-        
         if(!output.size() || nums[index] >= output.back())
         {
             output.push_back(nums[index]);
             solve(index+1,nums,output,s);
             output.pop_back();
-        }
-        
-        
+        }   
     }
     
     vector<vector<int>> findSubsequences(vector<int>& nums) {
@@ -30,10 +27,6 @@ public:
         set<vector<int>>s;
         solve(0,nums,output,s);
         
-        for(auto i:s)
-        {
-            ans.push_back(i);
-        }
-        return ans;
+        return vector(s.begin(),s.end());
     }
 };
