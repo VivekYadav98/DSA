@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solve(int index,vector<int>& nums,vector<int> output,set<vector<int>>& s)
+    void solve(int index,vector<int>& nums,vector<int>& output,set<vector<int>>& s)
     {
         if(index>=nums.size())
         {
@@ -14,13 +14,14 @@ public:
         solve(index+1,nums,output,s);
         
         
-        if(output.empty()==true || nums[index] >= output.back())
+        if(!output.size() || nums[index] >= output.back())
         {
             output.push_back(nums[index]);
+            solve(index+1,nums,output,s);
+            output.pop_back();
         }
         
-        solve(index+1,nums,output,s);
-        // output.pop_back();
+        
     }
     
     vector<vector<int>> findSubsequences(vector<int>& nums) {
