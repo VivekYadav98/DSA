@@ -40,7 +40,7 @@ void solve(char str[],string output,vector<string>& ans,int i)
     solve(str,output+str[i],ans,i+1);
     output.push_back(' ');
     solve(str,output+str[i],ans,i+1);
-    output.pop_back();
+    // output.pop_back();
 }
 
 vector<string>  spaceString(char str[])
