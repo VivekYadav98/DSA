@@ -15,15 +15,15 @@ public:
   }
     
     int minimizeXor(int num1, int num2) {
-        long long int setBits1 = check(num1);
-        long long int setBits2 = check(num2);
-        long long int x = num1;
+         int setBits1 = check(num1);
+         int setBits2 = check(num2);
+         int x = num1;
         if(setBits1 == setBits2)
         {
            return x; 
         }
         
-        long long int setBitsx = check(x);
+         int setBitsx = check(x);
         if(setBitsx < setBits2)
         {
             while(setBitsx<setBits2)
