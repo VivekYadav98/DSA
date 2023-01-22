@@ -16,10 +16,10 @@ class Solution
         s.push(x[0]);
         int i=1;
         
-        if(x.length()%2 != 0)
-        {
-            return false;
-        }
+        // if(x.length()%2 != 0)
+        // {
+        //     return false;
+        // }
         
         while(i<x.length())
         {
