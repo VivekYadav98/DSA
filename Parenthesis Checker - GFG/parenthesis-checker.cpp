@@ -21,7 +21,7 @@ class Solution
             return false;
         }
         
-        while(!s.empty() || i<x.length())
+        while(i<x.length())
         {
             if(x[i] == '[' || x[i] == '{' || x[i] == '(')
             {
@@ -49,7 +49,7 @@ class Solution
             i++;
         }
         
-        if(!s.empty() || i<x.length())
+        if(!s.empty())
         {
             return false;
         }
