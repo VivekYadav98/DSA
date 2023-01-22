@@ -50,7 +50,7 @@ class Solution {
            }
        }
        
-       sort(factors.begin(),factors.end(),greater<int>{});
+    //   sort(factors.begin(),factors.end(),greater<int>{});
        
        int ans = 1;
        for(auto it:factors)
@@ -66,8 +66,7 @@ class Solution {
            
            if(count>=K)
            {
-               ans = it;
-               break;
+               ans = max(ans,it);
            }
        }
        return ans;
