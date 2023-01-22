@@ -21,7 +21,7 @@ class Solution{
             prefix[i] = A[i] + prefix[i-1];
         }
         
-         map<int,int>m;
+         unordered_map<int,int>m;
         for(int i=0;i<n;i++)
         {
             if(m.find(prefix[i]) != m.end())
