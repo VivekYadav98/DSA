@@ -25,17 +25,19 @@ public:
            {
                prefixSum += arr[i];
                
-               if(m.find(prefixSum) == m.end())
-               {
-                   m[prefixSum] = i;
-               }
-               
-               if(prefixSum == 0)
-               {
-                   ans = max(ans,i+1);
-               }
-               
-               ans = max(ans,i-m[prefixSum]);
+               if(m.find(prefixSum) != m.end())
+                {
+                    int x = i-m[prefixSum];
+                    ans = max(ans,x);
+                }
+                else if(prefixSum == 0)
+                {
+                    ans = max(ans,i+1);
+                }
+                else
+                {
+                    m[prefixSum] = i;
+                }
            }
            return ans;
     }
