@@ -13,7 +13,7 @@ public:
         }
         return true;
     }
-    void solve(string s,int index,vector<vector<string>>& ans,vector<string>& path)
+    void solve(string s,int index,vector<vector<string>>& ans,vector<string> path)
     {
         if(index == s.size())
         {
