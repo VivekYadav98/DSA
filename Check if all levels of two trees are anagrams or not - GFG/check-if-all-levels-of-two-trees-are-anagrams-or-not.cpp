@@ -91,8 +91,8 @@ class Solution{
         
         while(!q1.empty() && !q2.empty())
         {
-            map<int,int>m1;
-            map<int,int>m2;
+            unordered_map<int,int>m1;
+            unordered_map<int,int>m2;
             int count1 = q1.size();
             int count2 = q2.size();
             
@@ -129,9 +129,28 @@ class Solution{
                 }
             }
             
-            if(m1 != m2)
+            for(auto i:m1)
             {
-                return false;
+                if(m2.find(i.first) == m2.end())
+                {
+                    return false;
+                }
+                else if(m1[i.first] != m2[i.first])
+                {
+                    return false;
+                }
+            }
+            
+            for(auto i:m2)
+            {
+                if(m1.find(i.first) == m1.end())
+                {
+                    return false;
+                }
+                else if(m1[i.first] != m2[i.first])
+                {
+                    return false;
+                }
             }
         }
         return true;
