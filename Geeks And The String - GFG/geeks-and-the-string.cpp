@@ -7,36 +7,31 @@ using namespace std;
 class Solution {
   public:
     string removePair(string s) {
-        stack<char>st;
-        st.push(s[0]);
-        int i=1;
-        
-        while(i<s.length())
+         string res = "";
+        for(int i=0;i<s.length();i++)
         {
-            if(!st.empty() && s[i] == st.top())
+            if(i<s.length()-1 && s[i] == s[i+1])
             {
-                st.pop();
+                i++;
             }
             else
             {
-                st.push(s[i]);
+                res += s[i];
             }
-            i++;
         }
         
-        string ans = "";
-        while(!st.empty())
+        if(s.length() == res.length())
         {
-            ans = st.top()+ans;
-            st.pop();
+            return s;
         }
-        
-        
-        if(!ans.size())
+        else if(res.length() == 0)
         {
             return "-1";
         }
-        return ans;
+        else
+        {
+            return removePair(res);
+        }
     }
 };
 
