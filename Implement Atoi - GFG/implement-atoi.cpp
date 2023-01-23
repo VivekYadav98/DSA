@@ -15,7 +15,7 @@ class Solution{
        bool flag = false;
        for(int i=0;i<str.length();i++)
        {
-           if((str[i] == '-' && str[i+1] == '-') || (str[i] == '-' && i != 0))
+           if(str[i] == '-' && i != 0)
            {
                return -1;
            }
