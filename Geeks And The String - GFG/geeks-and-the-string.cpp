@@ -16,13 +16,12 @@ class Solution {
             if(!st.empty() && s[i] == st.top())
             {
                 st.pop();
-                i++;
             }
             else
             {
                 st.push(s[i]);
-                i++;
             }
+            i++;
         }
         
         string ans = "";
