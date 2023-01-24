@@ -47,20 +47,17 @@ public:
                     int r = p.first;
                     int c = p.second;
 
-                    if(visited[r][c] == true)
+                    if(!visited[r][c])
                     {
-                        continue;
-                    }
-
-                    visited[r][c] = true;
-
-                    if(board[r][c] == -1)
-                    {
-                        q.push(k+x);
-                    }
-                    else
-                    {
-                        q.push(board[r][c]);
+                        visited[r][c] = true;
+                        if(board[r][c] == -1)
+                        {
+                            q.push(k+x);
+                        }
+                        else
+                        {
+                            q.push(board[r][c]);
+                        }
                     }
                 }
             }
