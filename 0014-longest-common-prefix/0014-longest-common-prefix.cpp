@@ -13,7 +13,7 @@ public:
                 }
                 else
                 {
-                  j = strs[i].length();  
+                  break; 
                 }
             }
             temp = curr;
