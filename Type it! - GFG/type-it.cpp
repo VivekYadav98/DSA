@@ -39,6 +39,11 @@ class Solution {
        }
        
        int n = s.length();
+       if(ans == 0)
+       {
+           return n;
+       }
+       
        return n-ans+1;
     }
 };
