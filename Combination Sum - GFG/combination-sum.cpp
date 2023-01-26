@@ -10,36 +10,39 @@ using namespace std;
 
 class Solution {
   public:
-   void solve(vector<int>& candidates,int target,vector<int>& temp,vector<vector<int>>& ans,int i)
+  void solve(int ind,vector<int>& temp,vector<int>& arr,vector<vector<int>>& ans,int target)
     {
-       if(i == candidates.size())
-       {
-           if(target == 0)
-           {
-               ans.push_back(temp);
-           }
-           return;
-       }
-       
-       if(candidates[i] <= target)
-       {
-           temp.push_back(candidates[i]);
-           solve(candidates,target-candidates[i],temp,ans,i);
-           temp.pop_back();
-       }
+        if(target == 0)
+        {
+            ans.push_back(temp);
+            return;
+        }
 
-       solve(candidates,target,temp,ans,i+1);
+        for(int i=ind;i<arr.size();i++)
+        {
+            if(i>ind && arr[i] == arr[i-1])
+            {
+                continue;
+            }
+
+            if(arr[i] > target)
+            {
+                break;
+            }
+
+            temp.push_back(arr[i]);
+            solve(i,temp,arr,ans,target-arr[i]);
+            temp.pop_back();
+        }
     }
+
     //Function to return a list of indexes denoting the required 
     //combinations whose sum is equal to given number.
     vector<vector<int> > combinationSum(vector<int> &A, int B) {
         sort(A.begin(),A.end());
-        A.erase(unique(A.begin(), A.end()), A.end());
         vector<vector<int>>ans;
         vector<int>temp;
-        
-        solve(A,B,temp,ans,0);
-        
+        solve(0,temp,A,ans,B);
         return ans;
     }
 };
