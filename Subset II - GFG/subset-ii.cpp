@@ -10,39 +10,27 @@ using namespace std;
 class Solution {
 
   public:
-  void solve(vector<int>& nums, int index,vector<int>& temp,vector<vector<int>>& ans)
+   void solve(vector<int>& nums, int index,vector<int>& temp,vector<vector<int>>& ans)
     {
-        if(index>=nums.size())
+        ans.push_back(temp);
+
+        for(int i=index;i<nums.size();i++)
         {
-            ans.push_back(temp);
-            return;
+            if(i > index && nums[i] == nums[i-1])
+            {
+                continue;
+            }
+
+            temp.push_back(nums[i]);
+            solve(nums,i+1,temp,ans);
+            temp.pop_back();
         }
-        
-//         exclude
-        solve(nums, index+1,temp,ans);
-        
-//         include
-        temp.push_back(nums[index]);
-        solve(nums, index+1,temp,ans);  
-        temp.pop_back();
     }
     
     vector<vector<int>> printUniqueSubsets(vector<int>& nums) {
-        // sort(nums.begin(),nums.end());
         vector<vector<int>>ans;
         vector<int>temp;
         solve( nums,0,temp,ans);
-        set<vector<int>>s;
-        for(auto i:ans)
-        {
-            s.insert(i);
-        }
-
-       ans.clear();
-        for(auto i:s)
-        {
-            ans.push_back(i);
-        }
         return ans;
     }
 };
