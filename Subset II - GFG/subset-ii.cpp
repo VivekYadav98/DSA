@@ -28,7 +28,7 @@ class Solution {
     }
     
     vector<vector<int>> printUniqueSubsets(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
+        // sort(nums.begin(),nums.end());
         vector<vector<int>>ans;
         vector<int>temp;
         solve( nums,0,temp,ans);
