@@ -18,7 +18,7 @@ public:
                     return false;
                 }
             }
-            else if(color[nbr] == col)
+            else if(color[nbr] == color[src])
             {
                 return false;
             }
