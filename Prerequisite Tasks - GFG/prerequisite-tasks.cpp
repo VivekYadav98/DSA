@@ -9,7 +9,7 @@ public:
 	    vector<vector<int>>adj(N);
 	    for(int i=0;i<prerequisites.size();i++)
 	    {
-	        adj[prerequisites[i].first].push_back(prerequisites[i].second);
+	        adj[prerequisites[i].second].push_back(prerequisites[i].first);
 	    }
 	    
 	    vector<int>indegree(N,0);
