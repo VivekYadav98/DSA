@@ -22,7 +22,7 @@ public:
 	    }
 	    
 	    queue<int>q;
-	    int count = 0;
+	     vector<int>ans;
 	    for(int i=0;i<N;i++)
 	    {
 	        if(indegree[i] == 0)
@@ -35,7 +35,7 @@ public:
 	    {
 	        int node = q.front();
 	        q.pop();
-	        count++;
+	        ans.push_back(node);
 	        
 	        for(auto it:adj[node])
 	        {
@@ -48,7 +48,7 @@ public:
 	        }
 	    }
 	    
-	    if(count == N)
+	    if(ans.size() == N)
 	    {
 	        return true;
 	    }
