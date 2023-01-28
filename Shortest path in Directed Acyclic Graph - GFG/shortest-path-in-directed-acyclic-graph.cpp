@@ -44,7 +44,7 @@ class Solution {
         vector<int>dist(N,INT_MAX);
         dist[0] = 0;
         
-        s.push(0);
+        // s.push(0);
         
         while(!s.empty())
         {
