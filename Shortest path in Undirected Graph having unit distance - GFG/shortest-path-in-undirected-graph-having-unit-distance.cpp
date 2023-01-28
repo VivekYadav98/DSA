@@ -17,13 +17,13 @@ class Solution {
         }
         
         vector<int>dist(N,INT_MAX);
-        queue<pair<int,int>>q;
+        queue<int>q;
         dist[src] = 0;
-        q.push({src,0});
+        q.push(src);
         
         while(!q.empty())
         {
-            int node = q.front().first;
+            int node = q.front();
             q.pop();
             
             for(auto it:adj[node])
@@ -31,7 +31,7 @@ class Solution {
                 if(dist[node] + 1 < dist[it])
                 {
                     dist[it] = dist[node] + 1;
-                    q.push({it,dist[it]});
+                    q.push(it);
                 }
             }
         }
