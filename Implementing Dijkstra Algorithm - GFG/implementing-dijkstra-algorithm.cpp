@@ -17,17 +17,15 @@ class Solution
         
         while(!minHeap.empty())
         {
-            pair<int,int>p = minHeap.top();
-            int node = p.second;
+            int node = minHeap.top().second;
             minHeap.pop();
             
-            for(int i=0;i<adj[node].size();i++)
+            for(auto it:adj[node])
             {
-                int edgeWt = adj[node][i][1];
-                if(dist[node] + edgeWt < dist[adj[node][i][0]])
+                if(dist[node] + it[1] < dist[it[0]])
                 {
-                    dist[adj[node][i][0]] = dist[node]+adj[node][i][1];
-                    minHeap.push({dist[adj[node][i][0]],adj[node][i][0]});
+                    dist[it[0]] = dist[node] + it[1];
+                    minHeap.push({dist[it[0]],it[0]});
                 }
             }
         }
