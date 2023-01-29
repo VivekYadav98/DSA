@@ -11,13 +11,13 @@ class Solution {
         {
             return 0;
         }
-        else if(((a&b) == a) || (a&b) == b)
+        else if(((a&b) != a) && (a&b) != b)
         {
-            return 1;
+            return 2;
         }
         else
         {
-            return 2;
+            return 1;
         }
     }
 };
