@@ -22,14 +22,14 @@ class Solution {
             int node = q.front().second;
             q.pop();
             
+            if(node == end)
+            {
+                return steps;
+            }
+                
             for(int i=0;i<arr.size();i++)
             {
                 int num = (node*arr[i])%100000;
-                
-                if(num == end)
-                {
-                    return steps+1;
-                }
                 
                 if(steps+1 < dist[num])
                 {
