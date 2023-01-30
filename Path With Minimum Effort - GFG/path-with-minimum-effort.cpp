@@ -20,13 +20,13 @@ class Solution {
         {
             auto it = pq.top();
             pq.pop();
-            int dif = it.first;
+            int effort = it.first;
             int r = it.second.first;
             int c = it.second.second;
             
             if(r == n-1 && c == m-1)
             {
-                return dif;
+                return effort;
             }
             
             for(int i=0;i<4;i++)
@@ -36,7 +36,7 @@ class Solution {
                 
                 if(newr>=0 && newr<n && newc>=0 && newc<m)
                 {
-                    int newEffort = max(abs(heights[newr][newc] - heights[r][c]),dif);
+                    int newEffort = max(abs(heights[newr][newc] - heights[r][c]),effort);
                     if(newEffort < diff[newr][newc])
                     {
                         diff[newr][newc] = newEffort;
