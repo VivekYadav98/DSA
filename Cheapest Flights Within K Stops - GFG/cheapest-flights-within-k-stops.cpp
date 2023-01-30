@@ -23,15 +23,15 @@ class Solution {
             q.pop();
             int stops = i.first;
             int node = i.second.first;
-            int dis = i.second.second;
+            int cost = i.second.second;
             
             for(auto it:adj[node])
             {
                  if(stops<=K)
                  {
-                     if(dis + it.second < dist[it.first])
+                     if(cost + it.second < dist[it.first])
                      {
-                         dist[it.first] = dis + it.second;
+                         dist[it.first] = cost + it.second;
                          q.push({stops+1,{it.first,dist[it.first]}});
                      }
                  }
