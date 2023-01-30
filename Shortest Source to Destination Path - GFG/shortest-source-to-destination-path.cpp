@@ -35,11 +35,6 @@ class Solution {
 	        int c = q.front().second.second;
 	        q.pop();
 	        
-	        if(r==X && c==Y)
-	        {
-	            return steps;
-	        }
-	        
 	        for(int i=0;i<4;i++)
 	        {
 	            int newr = r+dr[i];
@@ -56,7 +51,14 @@ class Solution {
 	        }
 	    }
 	    
-	     return -1;
+	    if(dist[X][Y] == INT_MAX)
+	    {
+	        return -1;
+	    }
+	    else
+	    {
+	        return dist[X][Y];
+	    }
     }
 };
 
