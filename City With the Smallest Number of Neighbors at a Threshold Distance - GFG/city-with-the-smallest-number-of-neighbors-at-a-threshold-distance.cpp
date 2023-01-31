@@ -1,0 +1,90 @@
+//{ Driver Code Starts
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+// User function Template for C++
+class Solution {
+  public:
+    int findCity(int n, int m, vector<vector<int>>& edges,int distanceThreshold) {
+         vector<vector<int>>cost(n,vector<int>(n,INT_MAX));
+         for(auto it:edges)
+         {
+             cost[it[0]][it[1]] = it[2];
+             cost[it[1]][it[0]] = it[2];
+         }
+         
+         for(int k=0;k<n;k++)
+         {
+             for(int i=0;i<n;i++)
+             {
+                 for(int j=0;j<n;j++)
+                 {
+                     if(cost[i][k] == INT_MAX || cost[k][j] == INT_MAX)
+                     {
+                         continue;
+                     }
+                     cost[i][j] = min(cost[i][j],cost[i][k]+cost[k][j]);
+                 }
+             }
+         }
+         
+         for(int i=0;i<n;i++)
+         {
+             cost[i][i] = 0;
+         }
+         
+         int count = n;
+         int city = -1;
+         
+         for(int i=0;i<n;i++)
+         {
+             int cnt = 0;
+             for(int j=0;j<n;j++)
+             {
+                 if(cost[i][j] <= distanceThreshold)
+                 {
+                     cnt++;
+                 }
+             }
+             
+             if(cnt <= count)
+             {
+                 city = i;
+                 count = cnt;
+             }
+         }
+         return city;
+  }
+};
+
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+        vector<vector<int>> adj;
+        // n--;
+        for (int i = 0; i < m; ++i) {
+            vector<int> temp;
+            for (int j = 0; j < 3; ++j) {
+                int x;
+                cin >> x;
+                temp.push_back(x);
+            }
+            adj.push_back(temp);
+        }
+
+        int dist;
+        cin >> dist;
+        Solution obj;
+        cout << obj.findCity(n, m, adj, dist) << "\n";
+    }
+}
+
+// } Driver Code Ends
