@@ -35,7 +35,7 @@ class Solution {
                 if(dis+it.second < dist[it.first])
                 {
                     dist[it.first] = dis + it.second;
-                    ways[it.first] += ways[node];
+                    ways[it.first] = ways[node];
                     pq.push({dist[it.first],it.first});
                 }
                 else if(dis+it.second == dist[it.first])
