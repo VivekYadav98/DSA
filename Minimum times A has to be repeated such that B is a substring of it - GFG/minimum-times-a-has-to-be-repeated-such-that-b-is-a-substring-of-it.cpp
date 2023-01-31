@@ -9,17 +9,24 @@ using namespace std;
 class Solution {
   public:
     int minRepeats(string A, string B) {
-        string c = A;
-        int count = 1;
-        while(A.find(B) == string::npos)
+        string ans = "";
+        int count = 0;
+        while(ans.length() <= B.length() + 2*A.length())
         {
-          if(A.length() >= 3*B.length())
-          {
-              return -1;
-          }
-
-            count++;
-            A += c;
+            if(ans.find(B) == string::npos)
+            {
+               ans += A;
+               count++;
+            }
+            else
+            {
+                break;
+            }
+        }
+       
+        if(ans.find(B) == string::npos)
+        {
+            return -1;
         }
         return count;
     }
