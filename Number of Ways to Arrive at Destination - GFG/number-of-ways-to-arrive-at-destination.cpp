@@ -22,6 +22,7 @@ class Solution {
         dist[0] = 0;
         ways[0] = 1;
         pq.push({0,0});
+        int mod = 1e9+7;
         
         while(!pq.empty())
         {
@@ -40,11 +41,11 @@ class Solution {
                 }
                 else if(dis+it.second == dist[it.first])
                 {
-                    ways[it.first] += ways[node];
+                    ways[it.first] = (ways[it.first] + ways[node])%mod;
                 }
             }
         }
-        return ways[n-1];
+        return ways[n-1]%mod;
     }
 };
 
