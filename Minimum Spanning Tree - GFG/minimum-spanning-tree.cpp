@@ -5,8 +5,8 @@ using namespace std;
 // } Driver Code Ends
 
 class DisjointSet{
-    vector<int>parent,rank;
     public:
+    vector<int>parent,rank;
        DisjointSet(int n)
        {
            rank.resize(n+1,0);
