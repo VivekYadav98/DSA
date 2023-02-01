@@ -129,9 +129,18 @@ void solve(Node* root,int k,unordered_map<Node*,Node*>& m,vector<Node*>& temp)
     if(root->left == NULL && root->right == NULL)
     {
         int n = temp.size();
-        if(n >= k+1)
+        int count = 0;
+        int i=n-1;
+        
+        while(count != k)
         {
-            m[temp[n-1-k]]++;
+            count++;
+            i--;
+        }
+        
+        if(count == k && i>=0 && m.find(temp[i]) == m.end())
+        {
+            m[temp[i]]++;
         }
     }
     
@@ -145,10 +154,7 @@ void solve(Node* root,int k,unordered_map<Node*,Node*>& m,vector<Node*>& temp)
 //Function to return count of nodes at a given distance from leaf nodes.
 int printKDistantfromLeaf(Node* root, int k)
 {
-    if(root == NULL)
-    {
-        return 0;
-    }
+    int ans = 0;
     unordered_map<Node*,Node*>m;
     vector<Node*>temp;
     solve(root,k,m,temp);
