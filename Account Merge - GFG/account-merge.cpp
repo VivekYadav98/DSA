@@ -59,7 +59,7 @@ class DisjointSet{
 class Solution{
   public:
     vector<vector<string>> accountsMerge(vector<vector<string>> &details) {
-         unordered_map<string,int>mapMailNode;
+       unordered_map<string,int>mapMailNode;
        int n = details.size();
        DisjointSet ds(n);
        
@@ -85,7 +85,8 @@ class Solution{
        for(auto it:mapMailNode)
        {
            string mail = it.first;
-           int node = ds.findUpar(it.second);
+           int node = it.second;
+           node = ds.findUpar(node);
            mergedMail[node].push_back(mail);
        }
        
