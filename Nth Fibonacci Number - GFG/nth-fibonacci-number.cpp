@@ -21,7 +21,7 @@ class Solution {
             prev2 = prev1;
             prev1 = curr;
         }
-        return curr%mod;
+        return prev1%mod;
     }
 };
 
