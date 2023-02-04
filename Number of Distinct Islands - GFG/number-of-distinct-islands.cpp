@@ -18,7 +18,7 @@ class Solution {
        int m = grid[0].size();
        
        int dr[] = {-1,0,1,0};
-       int dc[] = {0,-1,0,1};
+       int dc[] = {0,1,0,-1};
         
         for(int i=0;i<4;i++)
         {
