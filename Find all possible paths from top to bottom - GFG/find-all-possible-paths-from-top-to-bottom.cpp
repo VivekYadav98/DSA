@@ -28,8 +28,8 @@ public:
         
         temp.push_back(grid[i][j]);
         
-        solve(grid,i,j+1,n,m,temp,ans);
         solve(grid,i+1,j,n,m,temp,ans);
+        solve(grid,i,j+1,n,m,temp,ans);
         
         temp.pop_back();
     }
@@ -39,7 +39,6 @@ public:
         vector<vector<int>>ans;
         vector<int>temp;
         solve(grid,0,0,n,m,temp,ans);
-        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
