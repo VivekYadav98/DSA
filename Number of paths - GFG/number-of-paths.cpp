@@ -4,29 +4,17 @@ using namespace std;
  
 
 // } Driver Code Ends
-
-   void solve(int i,int j,int n,int m,long long& ans)
-    {
-        if(i==n-1 && j==m-1)
-        {
-            ans++;
-            return;
-        }
-        
-        if(i>=n || j>=m)
-        {
-            return;
-        }
-        
-        solve(i+1,j,n,m,ans);
-        solve(i,j+1,n,m,ans);
-    }
-
 long long  numberOfPaths(int m, int n)
 {
-    long long ans = 0;
-    solve(0,0,n,m,ans);
-    return ans;
+    int N = m+n-2;
+    int r = m-1;
+    double res = 1;
+    for(int i=1;i<=r;i++)
+    {
+        res = res*(N-r+i)/i;
+    }
+    
+    return (int)res;
 }
 
 //{ Driver Code Starts.
