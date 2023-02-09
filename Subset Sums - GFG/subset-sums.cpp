@@ -6,25 +6,24 @@ using namespace std;
 class Solution
 {
 public:
-    void solve(vector<int>& arr,vector<int>& ans,int i,int sum)
+    void solve(vector<int>& arr,int n,int i,int sum,vector<int>& ans)
     {
-        if(i>=arr.size())
+        if(i>=n)
         {
             ans.push_back(sum);
             return;
         }
         
-        solve(arr,ans,i+1,sum);
-        
+        solve(arr,n,i+1,sum,ans);
         sum += arr[i];
-        solve(arr,ans,i+1,sum);
+        solve(arr,n,i+1,sum,ans);
         sum -= arr[i];
     }
 
     vector<int> subsetSums(vector<int> arr, int N)
     {
         vector<int>ans;
-        solve(arr,ans,0,0);
+        solve(arr,N,0,0,ans);
         return ans;
     }
 };
