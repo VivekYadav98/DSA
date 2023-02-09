@@ -9,13 +9,9 @@ class Solution{
 	int mod = 1e9 + 7;
 	int solve(int ind,int sum,int arr[],vector<vector<int>>& dp)
 	{
-	    if(ind == 0)
+	    if(ind < 0)
 	    {
-	        if(sum == 0 && arr[0] == 0)
-	        {
-	            return 2;
-	        }
-	        if(sum == 0 || sum == arr[ind])
+	        if(sum == 0)
 	        {
 	            return 1;
 	        }
