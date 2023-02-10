@@ -18,7 +18,7 @@ class Solution{
             return true;
         }
         
-        string key = S1+" "+S2;
+        string key = S1+S2;
         if(mp.find(key) != mp.end())
         {
             return mp[key];
@@ -43,7 +43,7 @@ class Solution{
             } 
         }
         
-        string k = S1+" "+S2;
+        string k = S1+S2;
         mp[k] = flag;
         return flag;
     }    
