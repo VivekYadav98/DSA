@@ -68,7 +68,7 @@ public:
         {
             if(prime[i] == true)
             {
-                for(int j=2*i;j<=100001;j += i)
+                for(int j=2*i;j<=100001;j+=i)
                 {
                     prime[j] = false;
                 }
