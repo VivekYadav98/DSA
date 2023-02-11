@@ -31,27 +31,28 @@ public:
     }
     int knapSack(int N, int W, int val[], int wt[])
     {
-        vector<vector<int>>dp(N,vector<int>(W+1,0));
+       vector<int>prev(W+1,0),curr(W+1,0);
         for(int w=0;w<=W;w++)
         {
-            dp[0][w] = (w/wt[0])*val[0]; 
+            prev[w] = (w/wt[0])*val[0]; 
         }
         
         for(int ind=1;ind<N;ind++)
         {
             for(int w=0;w<=W;w++)
             {
-                int notPick = 0 + dp[ind-1][w];
+                int notPick = 0 + prev[w];
                 int pick = INT_MIN;
                 if(w >= wt[ind])
                 {
-                    pick = val[ind] + dp[ind][w-wt[ind]];
+                    pick = val[ind] + curr[w-wt[ind]];
                 }
-                dp[ind][w] = max(pick,notPick);
+                curr[w] = max(pick,notPick);
             }
+            prev = curr;
         }
         
-        return dp[N-1][W];
+        return prev[W];
     }
 };
 
