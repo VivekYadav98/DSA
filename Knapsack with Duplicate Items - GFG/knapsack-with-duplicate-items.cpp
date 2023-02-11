@@ -42,7 +42,7 @@ public:
             for(int w=0;w<=W;w++)
             {
                 int notPick = 0 + dp[ind-1][w];
-                int pick = 0;
+                int pick = INT_MIN;
                 if(w >= wt[ind])
                 {
                     pick = val[ind] + dp[ind][w-wt[ind]];
