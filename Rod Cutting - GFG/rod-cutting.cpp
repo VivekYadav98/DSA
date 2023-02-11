@@ -32,7 +32,7 @@ class Solution{
         return dp[ind][n] = max(pick,notPick);
     }
     int cutRod(int price[], int n) {
-        vector<int>prev(n+1,0),curr(n+1,0);
+        vector<int>prev(n+1,0);
         for(int N=0;N<=n;N++)
         {
             prev[N] = N*price[0];
@@ -47,11 +47,10 @@ class Solution{
                 int pick = INT_MIN;
                 if(rodLength <= N)
                 {
-                    pick = price[ind] + curr[N-rodLength];
+                    pick = price[ind] + prev[N-rodLength];
                 }
-                curr[N] = max(pick,notPick);
+                prev[N] = max(pick,notPick);
             }
-            prev = curr;
         }
         
         return prev[n];
