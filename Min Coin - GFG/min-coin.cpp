@@ -15,7 +15,7 @@ class Solution{
 	        }
 	        else
 	        {
-	            return 1e8;
+	            return 1e9;
 	        }
 	    }
 	    
@@ -34,9 +34,36 @@ class Solution{
 	int MinCoin(vector<int>nums, int amount)
 	{
 	    int n = nums.size();
-	    vector<vector<int>>dp(n,vector<int>(amount+1,-1));
-	    int ans = solve(n-1,amount,nums,dp);
-	    if(ans >= 1e8)
+	    vector<int>prev(amount+1,0),curr(amount+1,0);
+	    for(int t=0;t<=amount;t++)
+	    {
+	        if(t%nums[0] == 0)
+	        {
+	            prev[t] = t/nums[0];
+	        }
+	        else
+	        {
+	            prev[t] = 1e9;
+	        }
+	    }
+	    
+	    for(int ind=1;ind<n;ind++)
+	    {
+	        for(int target=0;target<=amount;target++)
+	        {
+	            int notPick = 0 + prev[target];
+        	    int pick = INT_MAX;
+        	    if(target >= nums[ind])
+        	    {
+        	        pick = 1 + curr[target-nums[ind]];
+        	    }
+        	    curr[target] = min(pick,notPick);
+	        }
+	        prev = curr;
+	    }
+	    
+	    int ans = prev[amount];
+	    if(ans >= 1e9)
 	    {
 	        return -1;
 	    }
