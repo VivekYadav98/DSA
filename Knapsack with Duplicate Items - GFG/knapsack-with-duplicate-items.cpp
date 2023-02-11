@@ -31,7 +31,7 @@ public:
     }
     int knapSack(int N, int W, int val[], int wt[])
     {
-       vector<int>prev(W+1,0),curr(W+1,0);
+       vector<int>prev(W+1,0);
         for(int w=0;w<=W;w++)
         {
             prev[w] = (w/wt[0])*val[0]; 
@@ -45,13 +45,11 @@ public:
                 int pick = INT_MIN;
                 if(w >= wt[ind])
                 {
-                    pick = val[ind] + curr[w-wt[ind]];
+                    pick = val[ind] + prev[w-wt[ind]];
                 }
-                curr[w] = max(pick,notPick);
+                prev[w] = max(pick,notPick);
             }
-            prev = curr;
         }
-        
         return prev[W];
     }
 };
