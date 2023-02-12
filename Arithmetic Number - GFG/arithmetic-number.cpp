@@ -10,14 +10,10 @@ using namespace std;
 class Solution{
 public:
     int inSequence(int A, int B, int C){
-        if(B == A)
-        {
-            return 1;
-        }
         int x = B-A;
         if(C!=0 && x%C == 0)
         {
-            if(C!=0 && x/C + 1 > 1)
+            if(C!=0 && x/C + 1 > 0)
             {
               return 1;
             }
