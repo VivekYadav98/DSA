@@ -5,7 +5,6 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    
     int longestCommonSubstr (string S1, string S2, int n, int m)
     {
       vector<vector<int>>dp(n+1,vector<int>(m+1,0));
