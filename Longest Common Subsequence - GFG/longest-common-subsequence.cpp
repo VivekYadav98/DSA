@@ -9,34 +9,29 @@ using namespace std;
 class Solution
 {
     public:
-    int solve(string s1,string s2,int m,int n,vector<vector<int>>& dp)
+    int solve(int i,int j,string s1,string s2,vector<vector<int>>& dp)
     {
-        if(m==0 || n==0)
+        if(i==0 || j==0)
         {
             return 0;
         }
-       
         
-        if(dp[m][n] != -1)
+        if(dp[i][j] != -1)
         {
-            return dp[m][n];
+            return dp[i][j];
         }
         
-        if(s1[m-1] == s2[n-1])
+        if(s1[i-1] == s2[j-1])
         {
-            return dp[m][n] = 1+solve(s1,s2,m-1,n-1,dp);
+            return 1+solve(i-1,j-1,s1,s2,dp);
         }
-        else
-        {
-            return dp[m][n] = max(solve(s1,s2,m-1,n,dp),solve(s1,s2,m,n-1,dp));
-        }
+        return dp[i][j] = max(solve(i-1,j,s1,s2,dp),solve(i,j-1,s1,s2,dp));
     }
-    
     //Function to find the length of longest common subsequence in two strings.
     int lcs(int x, int y, string s1, string s2)
     {
         vector<vector<int>>dp(x+1,vector<int>(y+1,-1));
-        return solve(s1,s2,x,y,dp);
+        return solve(x,y,s1,s2,dp);
     }
 };
 
