@@ -13,7 +13,7 @@ public:
     {
         if(ind == 0)
         {
-            long long int mini = INT_MAX;
+            long long int mini = LONG_MAX;
             for(int i=0;i<3;i++)
             {
                 if(i != last)
