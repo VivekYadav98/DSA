@@ -26,15 +26,12 @@ class Solution {
       }
       
       int maxi = 0;
-      int point = 0;
       for(int task=0;task<3;task++)
       {
           if(task != last)
           {
-              point = points[day][task] + solve(day-1,task,points,dp);
+              maxi = max(maxi , points[day][task] + solve(day-1,task,points,dp));
           }
-          
-          maxi = max(maxi,point);
       }
       return dp[day][last] = maxi;
   }
