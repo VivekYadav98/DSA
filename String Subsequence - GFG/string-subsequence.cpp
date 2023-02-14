@@ -9,61 +9,31 @@ using namespace std;
 
 class Solution{
 public:
-    // int solve(string S1,string S2,int n,int m)
-    // {
-    //     if(m==0)
-    //     {
-    //       return 1;
-    //     }
-        
-    //     if(n == 0)
-    //     {
-    //         return 0;
-    //     }
-        
-    //     if(S1[n-1] == S2[m-1])
-    //     {
-    //         return solve(S1,S2,n-1,m-1) + solve(S1,S2,n-1,m);
-    //     }
-    //     else
-    //     {
-    //         return solve(S1,S2,n-1,m);
-    //     }
-    // }
-    
-    int solveMem(string S1,string S2,int n,int m,vector<vector<int>>& dp)
+     int solve(int i,int j,string& s,string& t,vector<vector<int>>& dp)
     {
-        if(m==0)
+        if(j==0)return 1;
+        if(i==0)return 0;
+
+        if(dp[i][j] != -1)
         {
-           return 1;
+            return dp[i][j];
         }
-        
-        if(n == 0)
+
+        if(s[i-1] == t[j-1])
         {
-            return 0;
-        }
-        
-        if(dp[n][m] != -1)
-        {
-            return dp[n][m];
-        }
-        
-        if(S1[n-1] == S2[m-1])
-        {
-            return dp[n][m] = solveMem(S1,S2,n-1,m-1,dp) + solveMem(S1,S2,n-1,m,dp);
+            return dp[i][j] = solve(i-1,j-1,s,t,dp) + solve(i-1,j,s,t,dp);
         }
         else
         {
-            return dp[n][m] = solveMem(S1,S2,n-1,m,dp);
+            return dp[i][j] = solve(i-1,j,s,t,dp);
         }
     }
-
-    int countWays(string S1, string S2){
-        int n1 = S1.length();
-        int n2 = S2.length();
-        vector<vector<int>>dp(n1+1,vector<int>(n2+1,-1));
-
-        return solveMem(S1,S2,n1,n2,dp);
+  
+    int countWays(string s, string t){
+        int n = s.length();
+        int m = t.length();
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        return solve(n,m,s,t,dp);
     }
 };
 
