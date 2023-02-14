@@ -104,12 +104,11 @@ public:
             carry--;
         }
         
-        int n = ans.length();
-        n--;
-        while(ans[n] == '0')
+       int k = ans.length()-1;
+        while(ans[k] == '0')
         {
             ans.pop_back();
-            n--;
+            k--;
         }
         reverse(ans.begin(),ans.end());
         return ans;
