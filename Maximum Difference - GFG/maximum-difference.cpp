@@ -8,7 +8,6 @@ class Solution{
     void solve(int A[],int n,vector<int>& ls)
     {
           stack<int>s;
-          stack<int>temp;
           ls.push_back(0);
           s.push(A[0]);
           int i=1;
@@ -20,16 +19,9 @@ class Solution{
                  ls.push_back(s.top());
                  s.push(A[i]);
                  i++;
-                 
-                //  while(!temp.empty())
-                //  {
-                //      s.push(temp.top());
-                //      temp.pop();
-                //  }
              }
              else if(!s.empty())
              {
-                temp.push(s.top());
                 s.pop(); 
              }
              else
