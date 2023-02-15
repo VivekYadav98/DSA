@@ -12,24 +12,17 @@ class Solution{
 public:
     //Function to find the days of buying and selling stock for max profit.
     vector<vector<int> > stockBuySell(vector<int> A, int n){
-       vector<vector<int>> res;
-
-        int lastBuy=0;
-
+        vector<vector<int>>ans;
+        int last = 0;
         for(int i=1;i<n;i++)
-
         {
-
-            if(A[i]>A[lastBuy])
-
+            if(A[i] > A[last])
             {
-
-                res.push_back({lastBuy, i});
+                ans.push_back({last,i});
             }
-            lastBuy=i;
+            last = i;
         }
-        return res;
-
+        return ans;
     }
 };
 
