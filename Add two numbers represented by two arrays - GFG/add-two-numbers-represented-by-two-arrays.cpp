@@ -55,11 +55,9 @@ class Solution{
             carry = sum/10;
         }
         
-        int k=ans.length()-1;
-        while(ans[k] == '0')
+        while(ans.back() == '0')
         {
             ans.pop_back();
-            k--;
         }
         reverse(ans.begin(),ans.end());
         return ans;
