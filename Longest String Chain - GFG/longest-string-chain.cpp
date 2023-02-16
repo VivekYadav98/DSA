@@ -39,32 +39,25 @@ class Solution {
             return false;
         }
     }
-    int longestChain(int n, vector<string>& words) {
-        sort(words.begin(),words.end(),cmp);
-        vector<int>dp(n,1);
-        vector<int>hash(n);
-        int maxi = 1;
-        int lastIndex = 0;
-        for(int i=0;i<n;i++)
+    
+    int solve(vector<string>& words,int n,int i,int prev)
+    {
+        if(i == n)
         {
-            hash[i] = i;
-            
-            for(int prev=0;prev<i;prev++)
-            {
-                if(checkPossible(words[i],words[prev]) && 1+dp[prev] > dp[i])
-                {
-                    dp[i] = 1 + dp[prev];
-                    hash[i] = prev;
-                }
-            }
-            
-            if(dp[i] > maxi)
-            {
-                maxi = dp[i];
-                lastIndex = i;
-            }
+            return 0;
         }
-        return maxi;
+        
+        int len = solve(words,n,i+1,prev);
+        if(prev == -1 || checkPossible(words[i],words[prev]))
+        {
+            len = max(len, 1 + solve(words,n,i+1,i));
+        }
+        return len;
+    }
+    int longestChain(int n, vector<string>& words) {
+        vecto
+        sort(words.begin(),words.end(),cmp);
+       return solve(words,n,0,-1);
     }
 };
 
