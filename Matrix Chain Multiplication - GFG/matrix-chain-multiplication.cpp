@@ -28,7 +28,7 @@ public:
     }
     int matrixMultiplication(int N, int arr[])
     {
-        vector<vector<int>>dp(N+1,vector<int>(N+1,-1));
+        vector<vector<int>>dp(N,vector<int>(N,-1));
        return solve(1,N-1,arr,dp);
     }
 };
