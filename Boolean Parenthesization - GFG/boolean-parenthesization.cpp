@@ -67,7 +67,7 @@ public:
                 }
             }
         }
-        return dp[i][j][isTrue] = ways%mod;
+        return dp[i][j][isTrue] = ways;
     }
     
     int countWays(int N, string S){
