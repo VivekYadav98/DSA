@@ -28,20 +28,21 @@ public:
         }
     }
     int countPaths(int n){
-        vector<long long int>dp(n+1,0);
-        dp[1] = 0;
+        long long int prev = 0;
+        long long int curr = 0;
         for(int i=2;i<=n;i++)
         {
             if(i%2 == 0)
             {
-                dp[i] = ((dp[i-1]*3)%mod + 3)%mod;
+                curr = ((prev*3)%mod + 3)%mod;
             }
             else
             {
-                dp[i] = ((dp[i-1]*3)%mod - 3)%mod;
-            }  
+                curr = ((prev*3)%mod - 3)%mod;
+            }
+            prev = curr;
         }
-        return dp[n]%mod;
+        return prev%mod;
     }
 };
 
