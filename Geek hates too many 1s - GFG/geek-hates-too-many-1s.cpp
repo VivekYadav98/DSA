@@ -12,10 +12,10 @@ class Solution {
   public:
     int noConseBits(int n) {
         int cnt = 0;
-        int i = 30;
+        int i = 31;
         while(i>=0)
         {
-            int a = 1<<i;
+            int a = pow(2,i);
             if((n&a) == a)
             {
                 cnt++;
