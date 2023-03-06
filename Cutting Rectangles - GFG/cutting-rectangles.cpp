@@ -9,9 +9,18 @@ using namespace std;
 
 class Solution{
 public:
+    int gcd(int a,int b)
+    {
+        if(b == 0)
+        {
+            return a;
+        }
+        
+        return gcd(b,a%b);
+    }
     vector<long long int> minimumSquares(long long int L, long long int B)
     {
-        long long int n = __gcd(L,B);
+        long long int n = gcd(L,B);
         long long int a = L*B;
         long long int k = a/(n*n);
         
