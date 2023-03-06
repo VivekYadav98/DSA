@@ -27,8 +27,7 @@ class Solution {
             
             if(cnt == 3)
             {
-                int num = 4294967295 - a;
-                n = n&num;
+                n-=a;
                 cnt = 0;
             }
             i--;
