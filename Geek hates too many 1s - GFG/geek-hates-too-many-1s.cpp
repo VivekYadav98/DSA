@@ -27,7 +27,7 @@ class Solution {
             
             if(cnt == 3)
             {
-                n-=(1<<i);
+                n-=a;
                 cnt = 0;
             }
             i--;
