@@ -54,12 +54,23 @@ printList(Node* node);
 
 class Solution {
   public:
+    bool check(int count1[],int count2[])
+    {
+        for(int i=0;i<26;i++)
+        {
+            if(count1[i] != count2[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     vector<Node*> findAnagrams(struct Node* head, string s) {
-        map<char,int>m1;
-        map<char,int>m2;
+       int count1[26] = {0};
+       int count2[26] = {0};
         for(int i=0;i<s.length();i++)
         {
-            m1[s[i]]++;
+            count1[s[i]-'a']++;
         }
         
         vector<Node*>ans;
@@ -73,36 +84,36 @@ class Solution {
         {
             if(cnt < k)
             {
-              m2[curr->data]++;
+              count2[curr->data - 'a']++;
               cnt++;
               temp = curr;
               curr = curr->next;
             }
             else if(cnt == k)
             {
-                if(m1 == m2)
+                if(check(count1,count2))
                 {
                     temp->next = NULL;
                    
                     ans.push_back(prev);
                     cnt = 0;
-                    m2.clear();
+                    
+                    for(int i=0;i<26;i++)
+                    {
+                        count2[i] = 0;
+                    }
                     prev = curr;
                 }
                 else
                 {
-                    m2[prev->data]--;
-                    if(m2[prev->data] == 0)
-                    {
-                        m2.erase(prev->data);
-                    }
+                    count2[prev->data - 'a']--;
                     cnt--;
                     prev = prev->next;
                 }
             }
         }
         
-        if(m1 == m2)
+       if(check(count1,count2))
         {
             ans.push_back(prev);
         }
