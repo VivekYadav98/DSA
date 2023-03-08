@@ -66,7 +66,6 @@ class Solution {
         int k = s.length();
         Node* curr = head;
         Node* prev = head;
-        Node* prev1 = head;
         Node* temp = curr;
         int cnt = 0;
         
@@ -84,16 +83,10 @@ class Solution {
                 if(m1 == m2)
                 {
                     temp->next = NULL;
-                    
-                    // if(prev1 != head)
-                    // {
-                    //     prev1->next = NULL;
-                    // }
-                    
+                   
                     ans.push_back(prev);
                     cnt = 0;
                     m2.clear();
-                    prev1 = prev;
                     prev = curr;
                 }
                 else
@@ -104,7 +97,6 @@ class Solution {
                         m2.erase(prev->data);
                     }
                     cnt--;
-                    prev1 = prev;
                     prev = prev->next;
                 }
             }
@@ -112,14 +104,7 @@ class Solution {
         
         if(m1 == m2)
         {
-            // if(prev1 != head)
-            // {
-            //     prev1->next = NULL;
-            // }
             ans.push_back(prev);
-            cnt = 0;
-            m2.clear();
-            prev = curr;
         }
         return ans;
     }
