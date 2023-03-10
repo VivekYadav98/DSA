@@ -28,7 +28,7 @@ class Solution {
                 return true;
             }
         }
-        return  false;
+        return dp[i] = false;
     }
     int canReach(int A[], int N) {
         vector<int>dp(N+1,-1);
