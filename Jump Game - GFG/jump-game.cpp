@@ -16,11 +16,7 @@ class Solution {
             return true;
         }
 
-        if(dp[i] != -1)
-        {
-            return dp[i];
-        }
-
+        
         for(int jump=1;jump<=nums[i];jump++)
         {
             if(solve(i+jump , nums,dp,n))
@@ -28,7 +24,7 @@ class Solution {
                 return true;
             }
         }
-        return dp[i] = false;
+        return false;
     }
     int canReach(int A[], int N) {
         vector<int>dp(N+1,-1);
