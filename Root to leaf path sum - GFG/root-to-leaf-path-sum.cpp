@@ -89,7 +89,7 @@ complete this function */
 class Solution
 {
     public:
-    bool solve(Node* root,int& ans,int S)
+    bool solve(Node* root,int ans,int S)
     {
         if(root->left == NULL && root->right == NULL)
         {
@@ -98,8 +98,10 @@ class Solution
             {
                 return true;
             }
-            ans -= root->data;
+            else
+            {
                 return false;
+            }
         }
         
         ans += root->data;
@@ -116,7 +118,6 @@ class Solution
         {
             return true;
         }
-        ans -= root->data;
         return false;
     }
     bool hasPathSum(Node *root, int S) {
