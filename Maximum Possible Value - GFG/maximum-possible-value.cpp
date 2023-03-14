@@ -23,7 +23,7 @@ class Solution {
             else
             {
                 B[i] = B[i]-1;
-                if(B[i] >= 2)
+                if(B[i]>0)
                 {
                     mini = min(mini,A[i]);
                 }
