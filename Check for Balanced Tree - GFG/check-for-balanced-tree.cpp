@@ -128,14 +128,7 @@ class Solution{
             return false;
         }
         
-        bool a = isBalanced(root->left);
-        bool b = isBalanced(root->right);
-        
-        if((a&b) == false)
-        {
-            return false;
-        }
-        return true;
+        return (isBalanced(root->left) && isBalanced(root->right));
     }
 };
 
