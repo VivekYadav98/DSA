@@ -162,12 +162,6 @@ public:
                     }
                     flag = false;
                 }
-                
-                // if((temp->left != NULL && temp->right == NULL) || 
-                //   (temp->left != NULL && temp->right == NULL))
-                // {
-                //     return false;
-                // }
             }
         }
         return true;
