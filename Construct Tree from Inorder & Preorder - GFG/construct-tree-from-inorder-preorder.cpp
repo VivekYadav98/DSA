@@ -59,14 +59,9 @@ class Solution{
             }
         }
         
-        if(mid!=-1){
         root->left = solve(s,mid-1,ind,preorder,inorder,n);
         root->right = solve(mid+1,e,ind,preorder,inorder,n);
         return root;
-        }
-        else{
-            return NULL;
-        }
     }
         
     Node* buildTree(int in[],int pre[], int n)
