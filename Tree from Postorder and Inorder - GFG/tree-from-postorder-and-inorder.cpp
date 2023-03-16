@@ -91,6 +91,6 @@ struct Node
     
 Node *buildTree(int in[], int post[], int n) {
      int s=0,e=n-1;
-        int ind = e;
+        int ind = n-1;
         return solve(s,e,ind,post,in,n);
 }
