@@ -9,22 +9,21 @@ using namespace std;
 // User function Template for C++
 
 long long int no_of_subarrays(int n, vector<int> &arr) {
-   long long int ans = 0;
-   long long cnt = 0;
-   for(int i=0;i<n;i++)
-   {
-       if(arr[i] == 0)
-       {
-           cnt++;
-       }
-       else
-       {
-           ans += (cnt*(cnt+1))/2;
-           cnt = 0;
-       }
-   }
-   ans += (cnt*(cnt+1))/2;
-   return ans;
+   long long ans = 0,count = 0;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i] != 0)
+            {
+                count = 0;
+            }
+            else
+            {
+                count++;
+            }
+            ans += count;
+        }
+        return ans;
 }
 
 //{ Driver Code Starts.
