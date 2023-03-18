@@ -60,7 +60,7 @@ struct Node
 // function should return the root node to the 
 // new binary tree formed
 
-Node* solve(int s,int e,int pre[],int mirror[],int& ind)
+Node* solve(int s,int e,int pre[],int& ind)
 {
     if(s>e)
     {
@@ -70,12 +70,12 @@ Node* solve(int s,int e,int pre[],int mirror[],int& ind)
     Node* root = new Node(pre[ind++]);
     int num = (s+e)/2;
     
-    root->left = solve(num+1,e,pre,mirror,ind);
-    root->right = solve(s+1,num,pre,mirror,ind);
+    root->left = solve(num+1,e,pre,ind);
+    root->right = solve(s+1,num,pre,ind);
     return root;
 }
 Node* constructBinaryTree(int pre[], int preMirror[], int size)
 {
     int ind=0;
-    return solve(0,size-1,pre,preMirror,ind);
+    return solve(0,size-1,pre,ind);
 }
