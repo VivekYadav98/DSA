@@ -169,13 +169,11 @@ void sort(Node **head)
     if(x->data > x->next->data)
     {
         x = reverse(x);
-        *head = merge(x,y);
     }
     else
     {
         y = reverse(y);
-        *head = merge(y,x);
     }
     
-    
+    *head = merge(x,y);
 }
