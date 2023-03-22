@@ -50,7 +50,7 @@ class Solution
         return prev;
     }
     
-    void solve(Node* head,Node*& ans)
+    void solve(Node* head,Node* ans)
     {
         if(head == NULL)
         {
