@@ -15,7 +15,6 @@ public:
           stack<char>st;
           int i=0;
           long long pr=0,rp=0;
-          string temp = "";
           while(i<s.length())
           {
               if(st.empty())
@@ -37,6 +36,7 @@ public:
               i++;
           }
           
+          string temp = "";
           while(!st.empty())
           {
               temp += st.top();
@@ -75,7 +75,6 @@ public:
           stack<char>st;
           int i=0;
           long long pr=0,rp=0;
-          string temp = "";
           while(i<s.length())
           {
               if(st.empty())
@@ -97,6 +96,7 @@ public:
               i++;
           }
           
+          string temp = "";
           while(!st.empty())
           {
               temp += st.top();
