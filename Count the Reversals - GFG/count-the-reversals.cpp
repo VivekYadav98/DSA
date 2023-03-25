@@ -61,15 +61,6 @@ int countRev (string s)
             st.pop();
         }
         
-        if(open == 0)
-        {
-            return close/2;
-        }
-        else if(close == 0)
-        {
-            return open/2;
-        }
-        
         if(open%2 == 0)
         {
             ans += (open/2) + (close/2);
