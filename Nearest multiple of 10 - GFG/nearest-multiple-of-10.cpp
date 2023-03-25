@@ -31,7 +31,7 @@ class Solution{
             
             if(carry != 0)
             {
-                N.insert(N.begin(),'1');
+                N='1'+N;
             }
             return N;
         }
