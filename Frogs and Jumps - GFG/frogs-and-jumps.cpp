@@ -9,17 +9,17 @@ using namespace std;
 class Solution {
   public:
     int unvisitedLeaves(int N, int leaves, int frogs[]) {
-        vector<bool>vis(leaves+1,false);
-        vis[0] = true;
+        vector<bool>vis(leaves+1,true);
+        vis[0] = false;
         for(int i=0;i<N;i++)
         {
             int val = frogs[i];
-            if(!vis[val])
+            if(vis[val])
             {
-                vis[val] = true;
+                vis[val] = false;
                 for(int j=2*val;j<=leaves;j+=val)
                 {
-                    vis[j] = true;
+                    vis[j] = false;
                 }
             }
         }
@@ -27,7 +27,7 @@ class Solution {
         int ans = 0;
         for(int i=1;i<=leaves;i++)
         {
-            if(vis[i] == false)
+            if(vis[i])
             {
                 ans++;
             }
