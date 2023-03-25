@@ -14,17 +14,12 @@ class Solution {
         for(int i=0;i<N;i++)
         {
             int val = frogs[i];
-            
             if(!vis[val])
             {
                 vis[val] = true;
-                
                 for(int j=2*val;j<=leaves;j+=val)
                 {
-                    if(!vis[j])
-                    {
-                      vis[j] = true;
-                    }
+                    vis[j] = true;
                 }
             }
         }
