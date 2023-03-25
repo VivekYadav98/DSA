@@ -13,14 +13,10 @@ class Solution{
             {
                 return mid;
             }
-            if(A[l] == key)
-            {
-                return l;
-            }
             
             if(A[mid] > A[l])
             {
-                if(key > A[l] && key < A[mid])
+                if(key >= A[l] && key < A[mid])
                 {
                     h = mid-1;
                 }
@@ -31,7 +27,7 @@ class Solution{
             }
             else
             {
-                if(key < A[h] && key > A[mid])
+                if(key <= A[h] && key > A[mid])
                 {
                     l = mid+1;
                 }
