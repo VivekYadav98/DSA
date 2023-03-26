@@ -20,14 +20,14 @@ class Solution
           
           vector<int>dist(v,INT_MIN);
           dist[src] = 0;
-          priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-          pq.push({0,src});
+          queue<pair<int,int>>q;
+          q.push({0,src});
           
-          while(!pq.empty())
+          while(!q.empty())
           {
-              int node = pq.top().second;
-              int dis = pq.top().first;
-              pq.pop();
+              int node = q.front().second;
+              int dis = q.front().first;
+              q.pop();
               
               for(auto it:adj[node])
               {
@@ -36,7 +36,7 @@ class Solution
                   if(dis+newDistance > dist[newNode])
                   {
                       dist[newNode] = dis+newDistance;
-                      pq.push({dist[newNode],newNode});
+                      q.push({dist[newNode],newNode});
                   }
               }
           }
