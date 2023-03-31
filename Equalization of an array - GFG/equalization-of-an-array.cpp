@@ -10,7 +10,7 @@ class Solution{
   public:
     long int minOperations(int arr[], int N)
     {
-        long long int sum=0,cnt1=0,cnt2=0,ans1=0,ans2=0;
+        long long int sum=0,ans1=0,ans2=0;
         for(int i=0;i<N;i++)
         {
             sum += arr[i];
@@ -22,12 +22,10 @@ class Solution{
            if(arr[i] > target)
            {
                ans1 += arr[i]-target;
-               cnt1++;
            }
            else if(arr[i] < target)
            {
                ans2 += target-arr[i];
-               cnt2++;
            }
         }
         
