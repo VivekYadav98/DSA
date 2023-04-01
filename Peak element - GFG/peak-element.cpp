@@ -15,7 +15,7 @@ class Solution
     int peakElement(int arr[], int n)
     {
        int s=0,e=n-1,mid=e+(s-e)/2;
-       while(s<e)
+       while(s<=e)
        {
            mid=e+(s-e)/2;
            if(mid-1 >= 0 && mid+1 < n && arr[mid] >= arr[mid-1] && arr[mid] >= arr[mid+1])
