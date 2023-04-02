@@ -22,6 +22,7 @@ class Solution{
                 ans.push_back(a[i]);
             }
         }
+        
         reverse(ans.begin(),ans.end());
         return ans;
     }
