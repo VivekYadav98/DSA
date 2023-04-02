@@ -9,32 +9,32 @@ class Solution{
     // Function to find equilibrium point in the array.
     // a: input array
     // n: size of array
-    int equilibriumPoint(long long a[], int n) 
-    {
-        long long sumLeft[n];
-        long long sumRight[n];
-        sumLeft[0] = 0;
-        sumRight[n-1] = 0; 
-        
-        for(int i=1;i<n;i++)
-        {
-            sumLeft[i] = sumLeft[i-1] + a[i-1];
-        }
-        
-        for(int i=n-2;i>=0;i--)
-        {
-            sumRight[i] = sumRight[i+1] + a[i+1];
-        }
-        
-        for(int i=0;i<n;i++)
-        {
-            if(sumLeft[i] == sumRight[i])
-            {
-                return i+1;
-            }
-        }
-        return -1;
+    int equilibriumPoint(long long a[], int n) {
+       if(n == 1)
+       {
+           return 1;
+       }
+       int total = 0;
+       for(int i=0;i<n;i++)
+       {
+           total += a[i];
+       }
+       
+       int sum1 = 0;
+       int sum2 = 0;
+       for(int i=1;i<n;i++)
+       {
+           sum1 += a[i-1];
+           sum2 = total - sum1-a[i];
+           
+           if(sum1 == sum2)
+           {
+               return i+1;
+           }
+       }
+       return -1;
     }
+
 };
 
 //{ Driver Code Starts.
