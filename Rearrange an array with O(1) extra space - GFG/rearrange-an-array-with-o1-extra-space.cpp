@@ -13,17 +13,18 @@ class Solution{
     //Function to rearrange an array so that arr[i] becomes arr[arr[i]]
     //with O(1) extra space.
     void arrange(long long arr[], int n) {
-        long long temp[n];
+        int x = n;
         for(int i=0;i<n;i++)
         {
-            temp[i] = arr[i];
+            long long ind = arr[i];
+            long long oldVal = arr[ind]%x;
+            arr[i] = oldVal*x + arr[i];
         }
         
         for(int i=0;i<n;i++)
         {
-            arr[i] = temp[arr[i]];
+            arr[i] = arr[i]/x;
         }
-        
     }
 };
 
