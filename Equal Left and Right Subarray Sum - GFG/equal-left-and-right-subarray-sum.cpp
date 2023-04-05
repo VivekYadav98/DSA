@@ -41,13 +41,12 @@ class Solution {
             total += A[i];
         }
         
-        int sum1 = 0,sum2=0;
+        int sum = 0;
         for(int i=1;i<N;i++)
         {
-            sum1 += A[i-1];
-            sum2 = total-sum1-A[i];
+            sum += A[i-1];
             
-            if(sum1 == sum2)
+            if(sum == total-sum-A[i])
             {
                 return i+1;
             }
