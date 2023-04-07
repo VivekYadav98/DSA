@@ -33,7 +33,7 @@ int main() {
 	        }
 	        else if(cnt > k)
 	        {
-	            while(cnt > k && i<j)
+	            while(cnt > k)
 	            {
 	                if(arr[i]%2 == 0)
 	                {
