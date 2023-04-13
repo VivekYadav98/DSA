@@ -28,7 +28,7 @@ public:
             arr.push_back(1);
             for(int i=1;i<temp.size();i++)
             {
-                l num = (temp[i] + temp[i-1])%mod;
+                ll num = (temp[i] + temp[i-1])%mod;
                 arr.push_back(num);
             }
             
