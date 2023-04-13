@@ -8,7 +8,7 @@ using namespace std;
 // #define ll long long
 class Solution{
 public:
-    int mod = 1000000007;
+    int mod = 1e9+7;
     vector<ll> nthRowOfPascalTriangle(int n) {
         vector<vector<ll>>ans;
         if(n == 1)
@@ -28,7 +28,7 @@ public:
             arr.push_back(1);
             for(int i=1;i<temp.size();i++)
             {
-                long long int num = (temp[i] + temp[i-1])%mod;
+                l num = (temp[i] + temp[i-1])%mod;
                 arr.push_back(num);
             }
             
