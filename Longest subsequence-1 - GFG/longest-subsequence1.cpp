@@ -9,16 +9,16 @@ using namespace std;
 
 class Solution{
 public:
-    int solve(int i,int prev,int n,int arr[],vector<int>& dp)
+    int solve(int i,int prev,int n,int arr[],vector<vector<int>>& dp)
     {
         if(i>=n)
         {
             return 0;
         }
         
-        if(dp[i] != -1)
+        if(dp[i][prev+1] != -1)
         {
-            return dp[i];
+            return dp[i][prev];
         }
         
         int pick = INT_MIN,notPick = INT_MIN;
@@ -28,11 +28,11 @@ public:
         }
         
         notPick = solve(i+1,prev,n,arr,dp);
-        return max(pick,notPick);
+        return dp[i][prev+1] = max(pick,notPick);
     }
     int longestSubsequence(int N, int A[])
     {
-        vector<int>dp(N+1,-1);
+        vector<vector<int>>dp(N+1,vector<int>(10000,-1));
         return solve(0,-1,N,A,dp);
     }
 };
