@@ -10,41 +10,36 @@ using namespace std;
 
 class Solution{
   public:
-  int solve(string A,string B,int m,int n,vector<vector<int>>& dp)
-  {
-      if(m == 0 || n == 0)
-      {
-          return 0;
-      }
-      
-      if(dp[m][n] != -1)
-      {
-          return dp[m][n];
-      }
-      
-      if(A[m-1] == B[n-1])
-      {
-          return dp[m][n] = 1+solve(A,B,m-1,n-1,dp);
-      }
-      else
-      {
-          return dp[m][n] = max(solve(A,B,m-1,n,dp) , solve(A,B,m,n-1,dp));
-      }
-  }
-  
+     int solve(int i,int j,string s,string t,vector<vector<int>>& dp)
+    {
+        if(i <= 0 || j <= 0)
+        {
+            return 0;
+        }
+
+        if(dp[i][j] != -1)
+        {
+            return dp[i][j];
+        }
+
+        if(s[i-1] == t[j-1])
+        {
+            dp[i][j] = 1 + solve(i-1,j-1,s,t,dp);
+        }
+        else
+        {
+            dp[i][j] = max(solve(i-1,j,s,t,dp) , solve(i,j-1,s,t,dp));
+        }
+        return dp[i][j];
+    }
+
     int longestPalinSubseq(string A) {
         string B = A;
-        int m = A.length();
-        int n = B.length();
-        
-        if(n == 1)
-        {
-            return 1;
-        }
-        
         reverse(B.begin(),B.end());
-        vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
-        return solve(A,B,m,n,dp);
+        int n = A.length();
+        int m = n;
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        return solve(n,m,A,B,dp);
     }
 };
 
