@@ -33,7 +33,6 @@ class Solution {
     int totalTime(int n, vector<int> &arr, vector<int> &time) {
         long long int ans = 0;
         unordered_map<int,int>m;
-        
         int currTime = 0;
         m[arr[0]] = 0;
         
