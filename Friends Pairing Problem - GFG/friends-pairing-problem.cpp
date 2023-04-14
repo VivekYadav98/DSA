@@ -23,16 +23,23 @@ public:
     }
     int countFriendsPairings(int n) 
     { 
-        vector<long long int>dp(n+1,-1);
-        dp[0] = 0;
-        dp[1] = 1;
-        dp[2] = 2;
+        if(n == 1)
+        {
+            return 1;
+        }
+       
+        long long int prev2 = 1;
+        long long int prev1 = 2;
+        
         
         for(int i=3;i<=n;i++)
         {
-            dp[i] = (dp[i-1] + ((i-1)*dp[i-2])%mod)%mod;
+            long long int curr = (prev1 + ((i-1)*prev2)%mod)%mod;
+            
+            prev2 = prev1;
+            prev1 = curr;
         }
-        return dp[n]%mod;
+        return prev1%mod;
     }
 };    
  
