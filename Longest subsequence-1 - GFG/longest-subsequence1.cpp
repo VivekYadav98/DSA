@@ -9,26 +9,31 @@ using namespace std;
 
 class Solution{
 public:
-    int solve(int i,int prev,int n,int arr[])
+    int solve(int i,int prev,int n,int arr[],vector<int>& dp)
     {
         if(i>=n)
         {
             return 0;
         }
         
+        if(dp[i] != -1)
+        {
+            return dp[i];
+        }
+        
         int pick = INT_MIN,notPick = INT_MIN;
         if(prev == -1 || abs(arr[i]-prev) == 1)
         {
-            pick = 1+solve(i+1,arr[i],n,arr);
+            pick = 1+solve(i+1,arr[i],n,arr,dp);
         }
         
-        notPick = solve(i+1,prev,n,arr);
+        notPick = solve(i+1,prev,n,arr,dp);
         return max(pick,notPick);
     }
     int longestSubsequence(int N, int A[])
     {
-        
-        return solve(0,-1,N,A);
+        vector<int>dp(N+1,-1);
+        return solve(0,-1,N,A,dp);
     }
 };
 
