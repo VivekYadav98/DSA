@@ -31,28 +31,92 @@ public:
 class Solution {
   public:
     long long solve(int N, vector<int> &A, vector<int> &B) {
-        long long sum = 0;
-        vector<int> AP[2], BP[2];
-        for(int i = 0; i < N; i++) {
-           sum += A[i] - B[i];
-           AP[abs(A[i]) % 2].push_back(A[i]);
-           BP[abs(B[i]) % 2].push_back(B[i]);
-        }
-        if(sum != 0 || (int)AP[0].size() != (int)BP[0].size())
-        return -1;
+        int sum1 = 0,sum2=0;
         
-        long long ans = 0;
-        for(int i = 0; i < 2; i++) {
-           sort(AP[i].begin(), AP[i].end());
-           sort(BP[i].begin(), BP[i].end());
-        
-           for(int j = 0; j < (int)AP[i].size(); j++) {
-               ans += abs(AP[i][j] - BP[i][j]) / 2;
-           }
+        for(auto i:A)
+        {
+            sum1 += i;
         }
-        return ans / 2;
+        
+        for(auto i:B)
+        {
+            sum2 += i;
+        }
+        
+        if(sum1 != sum2)
+        {
+            return -1;
+        }
+        
+        sort(A.begin(),A.end());
+        sort(B.begin(),B.end());
+        bool flag = false;
+        for(int i=0;i<N;i++)
+        {
+            if(A[i] != B[i])
+            {
+                flag = true;
+                break;
+            }
+        }
+        
+        if(flag == false)
+        {
+            return 0;
+        }
+        
+        vector<int>temp1(N,0);
+        vector<int>temp2(N,0);
+        
+        int x=0,y=N-1;
+        int cnt1=0,cnt2=0;
+        for(auto i:A)
+        {
+            if(i%2 == 0)
+            {
+                cnt1++;
+                temp1[x++] = i;
+            }
+            else
+            {
+                temp1[y--] = i;
+            }
+        }
+        
+        x=0,y=N-1;
+        for(auto i:B)
+        {
+            if(i%2 == 0)
+            {
+                cnt2++;
+                temp2[x++] = i;
+            }
+            else
+            {
+                temp2[y--] = i;
+            }
+        }
+        
+        if(cnt1 != cnt2)
+        {
+            return -1;
+        }
+        
+        long long int cnt=0;
+        for(int i=0;i<N;i++)
+        {
+            cnt += abs(temp1[i]-temp2[i]);
+        }
+        
+        if(cnt%2 != 0)
+        {
+            return -1;
+        }
+        
+        return cnt/4;
     }
 };
+
 
 //{ Driver Code Starts.
 
