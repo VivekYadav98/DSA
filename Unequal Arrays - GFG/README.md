@@ -25,7 +25,7 @@ B[] = {1, 2, 10}
 <strong>Output:</strong> 2
 <strong>Explanation</strong>: </span>
 <span style="font-size:18px">Select i = 3, j = 2, A[3] = 6 + 2 = 8 and A[2] = 5 - 2 = 3</span>
-<span style="font-size:18px">Select i = 3, j = 2, A[3] = 10 - 2 = 8 and A[2] = 3 - 2 = 1</span>
+<span style="font-size:18px">Select i = 3, j = 2, A[3] = 8 + 2 = 10 and A[2] = 3 - 2 = 1</span>
 <span style="font-size:18px">Now A = {2, 1, 10} and B = {1, 2, 10}</span></pre>
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
