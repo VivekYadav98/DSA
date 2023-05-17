@@ -37,7 +37,7 @@ class Solution
     vector<int> JobScheduling(Job arr[], int n) 
     { 
         sort(arr,arr+n,cmp);
-        int size = INT_MIN;
+        int size = 0;
         for(int i=0;i<n;i++)
         {
             size = max(size,arr[i].dead);
