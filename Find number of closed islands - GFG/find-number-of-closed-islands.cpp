@@ -11,81 +11,67 @@ class Solution {
     public:
     int dr[4] = {-1,0,1,0};
     int dc[4] = {0,1,0,-1};
-
-    void dfs(int row,int col,vector<vector<int>>& grid,vector<vector<int>>& mark)
+    
+    void dfs(int row,int col,vector<vector<int>>& matrix,vector<vector<bool>>& vis,int N,int M)
     {
-        int n = grid.size();
-        int m = grid[0].size();
-
-        for(int i=0;i<4;i++)
+        vis[row][col] = true;
+        
+        for(int k=0;k<4;k++)
         {
-            int newr = row+dr[i];
-            int newc = col+dc[i];
-
-            if(newr<0 || newr>=n || newc<0 || newc>=m)
+            int newr = row + dr[k];
+            int newc = col + dc[k];
+            
+            if(newr>=0 && newr<N && newc>=0 && newc<M && !vis[newr][newc] && matrix[newr][newc] == 1)
             {
-                continue;
-            }
-
-            if(grid[newr][newc] == 1 && mark[newr][newc] == 0)
-            {
-                mark[newr][newc] = 1;
-                dfs(newr,newc,grid,mark);
+                dfs(newr,newc,matrix,vis,N,M);
             }
         }
     }
-
-     
-    int closedIslands(vector<vector<int>>& grid, int N, int M) {
-        int n = grid.size();
-        int m = grid[0].size();
-        vector<vector<int>>mark(n,vector<int>(m,0));
+    
+    int closedIslands(vector<vector<int>>& matrix, int N, int M) {
+        vector<vector<bool>>vis(N,vector<bool>(M,false));
+        
+        for(int i=0;i<M;i++)
+        {
+            if(matrix[0][i] == 1 && !vis[0][i])
+            {
+                dfs(0,i,matrix,vis,N,M);
+            }
+        }
+        
+        for(int i=0;i<N;i++)
+        {
+            if(matrix[i][0] == 1 && !vis[i][0])
+            {
+                dfs(i,0,matrix,vis,N,M);
+            }
+        }
+        
+        for(int i=0;i<M;i++)
+        {
+            if(matrix[N-1][i] == 1 && !vis[N-1][i])
+            {
+                dfs(N-1,i,matrix,vis,N,M);
+            }
+        }
+        
+        for(int i=0;i<N;i++)
+        {
+            if(matrix[i][M-1] == 1 && !vis[i][M-1])
+            {
+                dfs(i,M-1,matrix,vis,N,M);
+            }
+        }
+        
         int ans = 0;
-
-        for(int i=0;i<m;i++)
+        for(int i=0;i<N;i++)
         {
-            if(grid[0][i] == 1)
+            for(int j=0;j<M;j++)
             {
-                mark[0][i] = 1;
-                dfs(0,i,grid,mark);
-            }
-        }
-
-        for(int i=0;i<n;i++)
-        {
-            if(grid[i][0] == 1)
-            {
-                mark[i][0] = 1;
-                dfs(i,0,grid,mark);
-            }
-        }
-
-        for(int i=0;i<n;i++)
-        {
-            if(grid[i][m-1] == 1)
-            {
-                mark[i][m-1] = 1;
-                dfs(i,m-1,grid,mark);
-            }
-        }
-
-        for(int i=0;i<m;i++)
-        {
-            if(grid[n-1][i] == 1)
-            {
-                mark[n-1][i] = 1;
-                dfs(n-1,i,grid,mark);
-            }
-        }
-
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                if(grid[i][j] == 1 && mark[i][j] == 0)
+                if(matrix[i][j] == 1 && vis[i][j] == false)
                 {
                     ans++;
-                    dfs(i,j,grid,mark);
+                    dfs(i,j,matrix,vis,N,M);
                 }
             }
         }
