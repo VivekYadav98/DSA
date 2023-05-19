@@ -6,14 +6,14 @@ using namespace std;
 class Solution{
 public:
     int isHappy(int n){
-         unordered_set<int>s;
+        vector<int>arr(10000,-1);
         while(n != 1)
         {
-            if(s.find(n) != s.end())
+            if(arr[n] != -1)
             {
                 return false;
             }
-            s.insert(n);
+            arr[n]++;
             int sum = 0;
 
             while(n>0)
@@ -24,6 +24,7 @@ public:
             }
             n = sum;
         }
+    
         return true;
     }
 };
