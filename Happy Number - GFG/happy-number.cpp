@@ -6,16 +6,10 @@ using namespace std;
 class Solution{
 public:
     int isHappy(int n){
-        vector<int>arr(10000,-1);
+        vector<int>arr(300,-1);
         while(n != 1)
         {
-            if(arr[n] != -1)
-            {
-                return false;
-            }
-            arr[n]++;
             int sum = 0;
-
             while(n>0)
             {
                 int r = n%10;
@@ -23,6 +17,12 @@ public:
                 n /= 10;
             }
             n = sum;
+            
+            if(arr[n] != -1)
+            {
+                return false;
+            }
+            arr[n]++;
         }
     
         return true;
