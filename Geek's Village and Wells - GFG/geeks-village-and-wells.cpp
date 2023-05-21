@@ -10,64 +10,65 @@ using namespace std;
 
 class Solution{
 public:
-       vector<vector<int>> chefAndWells(int n,int m,vector<vector<char>> &c){
-        vector<vector<int>> ans(n, vector<int>(m,0));
-        queue<pair<int,pair<int,int>>> q;
-        
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(c[i][j]=='W'){
-                q.push({0,{i,j}});
-                ans[i][j]=0;
+    vector<vector<int>> chefAndWells(int n,int m,vector<vector<char>> &c){
+        vector<vector<int>>ans(n,vector<int>(m,INT_MAX));
+        queue<pair<pair<int,int> , int>>q;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(c[i][j] == 'W')
+                {
+                    ans[i][j] = 0;
+                    q.push({{i,j},0});
                 }
             }
         }
         
-        while(!q.empty()){
-            int size=q.size();
-            while(size--){
-                int dis=q.front().first;
-                int row=q.front().second.first;
-                int col=q.front().second.second;
-                q.pop();
-                 if(row-1>=0 && col>=0 && col<m && (c[row-1][col]=='.' || c[row-1][col]=='H')&& ans[row-1][col]==0){
-                     ans[row-1][col]=dis+1;
-                     q.push({dis+1,{row-1,col}});
-                 }
-                if(col-1>=0 && row>=0 && row<n && (c[row][col-1]=='.' || c[row][col-1]=='H')&& ans[row][col-1]==0){
-                     ans[row][col-1]=dis+1;
-                     q.push({dis+1,{row,col-1}});
-                 }
-                if(row+1<n && col>=0 && col<m && (c[row+1][col]=='.' || c[row+1][col]=='H')&& ans[row+1][col]==0){
-                     ans[row+1][col]=dis+1;
-                     q.push({dis+1,{row+1,col}});
-                 }
-                if(col+1<m && row>=0 && row<n && (c[row][col+1]=='.' || c[row][col+1]=='H')&& ans[row][col+1]==0){
-                     ans[row][col+1]=dis+1;
-                     q.push({dis+1,{row,col+1}});
-                 }
-                 
-            }
-        }
-        
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(c[i][j]=='.')
-                ans[i][j]=0;
+        while(!q.empty())
+        {
+            int row = q.front().first.first;
+            int col = q.front().first.second;
+            int cnt = q.front().second;
+            q.pop();
+            
+            int dr[4] = {-1,0,1,0};
+            int dc[4] = {0,1,0,-1};
+            
+            for(int k=0;k<4;k++)
+            {
+                int newr = row+dr[k];
+                int newc = col+dc[k];
                 
-                if(c[i][j]=='H'){
-                    if(ans[i][j]==0)
-                    ans[i][j]=-1;
-                    else
-                    ans[i][j]=ans[i][j]*2;
+                if(newr>=0 && newr<n && newc>=0 && newc<m)
+                {
+                    if((c[newr][newc] == 'H' || c[newr][newc] == '.') && ans[newr][newc] > (cnt+1)*2)
+                    {
+                        ans[newr][newc] = min(ans[newr][newc] , (cnt+1)*2);
+                        q.push({{newr,newc},cnt+1});
+                    }
                 }
             }
         }
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(ans[i][j] == INT_MAX)
+                {
+                    ans[i][j] = -1;
+                }
+                if(c[i][j] == 'N' || c[i][j] == '.')
+                {
+                    ans[i][j] = 0;
+                }
+            }
+        }
+        
         return ans;
     }
 };
-
-
 
 //{ Driver Code Starts.
 
