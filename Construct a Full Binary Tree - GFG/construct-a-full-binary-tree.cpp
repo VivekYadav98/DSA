@@ -17,6 +17,44 @@ struct Node
 };
 
 
+// } Driver Code Ends
+/* Structre of the Node of the Binary Tree is as follows
+struct Node
+{
+        int data;
+        struct Node *left, *right;
+};
+*/
+// your task is to complete this function
+// function should create a new binary tree
+// function should return the root node to the 
+// new binary tree formed
+class Solution{
+  public:
+    Node* solve(int s,int e,int pre[],int& ind)
+    {
+        if(s>e)
+        {
+            return NULL;
+        }
+        
+        Node* root = new Node(pre[ind++]);
+        int num = (s+e)/2;
+        
+        root->left = solve(s+1,num,pre,ind);
+        root->right = solve(num+1,e,pre,ind);
+        return root;
+    }
+    
+    Node* constructBinaryTree(int pre[], int preMirror[], int size)
+    {
+        int ind=0;
+        return solve(0,size-1,pre,ind);
+    }
+};
+
+//{ Driver Code Starts.
+
 void printInorder(Node* node)
 {
 	if (node == NULL)return;
@@ -24,8 +62,6 @@ void printInorder(Node* node)
 	cout<<node->data<<" ";
 	printInorder(node->right);
 }
-
-Node* constructBinaryTree(int pre[], int preMirror[], int size);
 
 // Driver program to test above functions
 int main()
@@ -40,42 +76,10 @@ int main()
 	    int preOrderMirror[n];
 	    for(int i=0; i<n; i++)cin>>preOrder[i];
 	    for(int i=0; i<n; i++)cin>>preOrderMirror[i];
-	    printInorder(constructBinaryTree(preOrder, preOrderMirror, n));
+	    Solution obj;
+	    printInorder(obj.constructBinaryTree(preOrder, preOrderMirror, n));
 	    cout<<endl;
     }
 	return 0;
 }
 // } Driver Code Ends
-
-
-/* Structre of the Node of the Binary Tree is as follows
-struct Node
-{
-        int data;
-        struct Node *left, *right;
-};
-*/
-// your task is to complete this function
-// function should create a new binary tree
-// function should return the root node to the 
-// new binary tree formed
-
-Node* solve(int s,int e,int pre[],int& ind)
-{
-    if(s>e)
-    {
-        return NULL;
-    }
-    
-    Node* root = new Node(pre[ind++]);
-    int num = (s+e)/2;
-    
-    root->left = solve(num+1,e,pre,ind);
-    root->right = solve(s+1,num,pre,ind);
-    return root;
-}
-Node* constructBinaryTree(int pre[], int preMirror[], int size)
-{
-    int ind=0;
-    return solve(0,size-1,pre,ind);
-}
