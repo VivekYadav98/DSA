@@ -111,7 +111,6 @@ class Solution{
        }
        
        int num = m[-1][0];
-       Node* root = new Node(num);
        return solve(num,m,N);
     }
 };
