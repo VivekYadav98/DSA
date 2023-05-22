@@ -9,87 +9,133 @@ using namespace std;
 // } Driver Code Ends
 //User function Template for C++
 
-
-   class Solution
+class Solution
 {
 public:
-    vector <int> smaller_bef(vector<int> &arr){
-        stack <int> s;
-        int n = arr.size();
-        vector<int> ans (n, -1);
+    vector<int> nearestSmallerTower(vector<int> arr)
+    {
+        vector<int>leftSmallest;
+        reverse(arr.begin(),arr.end());
         
-        for(int i=0; i<n; i++){
-            if(s.empty()){
-                s.push(i);
-                ans[i] = -1;
+        int n = arr.size();
+        int i = n-1;
+        stack<pair<int,int>>s;
+        while(i>=0)
+        {
+            if(s.empty())
+            {
+                leftSmallest.push_back(-1);
+                s.push({arr[i],n-1-i});
+                i--;
             }
-            else{
-                while(!s.empty() && arr[s.top()] >= arr[i] ){
+            else
+            {
+                if(s.top().first < arr[i])
+                {
+                    leftSmallest.push_back(s.top().second);
+                    s.push({arr[i],n-1-i});
+                    i--;
+                }
+                else
+                {
                     s.pop();
                 }
-                if(s.empty()){
-                    s.push(i);
-                    ans[i] = -1;
-                }
-                else {ans[i] = s.top(); s.push(i);}
             }
         }
-        return ans;
-    }
-    
-    vector <int> smaller_aft(vector<int> &arr){
-        stack <int> s;
-        int n = arr.size();
-        vector<int> ans (n, -1);
         
-        for(int i=n-1; i>=0; i--){
-            if(s.empty()){
-                s.push(i);
-                ans[i] = -1;
+        while(!s.empty())
+        {
+            s.pop();
+        }
+        
+        vector<int>rightSmallest;
+        reverse(arr.begin(),arr.end());
+        
+        i = n-1;
+        while(i>=0)
+        {
+            if(s.empty())
+            {
+                rightSmallest.push_back(-1);
+                s.push({arr[i],i});
+                i--;
             }
-            else{
-                while(!s.empty() && arr[s.top()] >= arr[i] ){
+            else
+            {
+                if(s.top().first < arr[i])
+                {
+                    rightSmallest.push_back(s.top().second);
+                    s.push({arr[i],i});
+                    i--;
+                }
+                else
+                {
                     s.pop();
                 }
-                if(s.empty()){
-                    s.push(i);
-                    ans[i] = -1;
-                }
-                else {ans[i] = s.top(); s.push(i);}
             }
         }
-        return ans;
-    }
-    
-    vector<int> nearestSmallerTower(vector<int> arr){
         
-        vector <int> smallest_before = smaller_bef(arr);
-        vector <int> smallest_after = smaller_aft(arr);
-        int n = arr.size();
-        vector <int> ans (n);
+        reverse(rightSmallest.begin(),rightSmallest.end());
         
-        for(int i=0; i<n; i++){
-            if(smallest_before[i] == -1){
-                ans[i] = smallest_after[i];
+        vector<int>ans;
+        for(int i=0;i<n;i++)
+        {
+            if(leftSmallest[i] == -1 && rightSmallest[i] == -1)
+            {
+                ans.push_back(-1);
             }
-            else if (smallest_after[i] == -1){
-                ans[i] = smallest_before[i];
+            else if(leftSmallest[i] == -1 && rightSmallest[i] != -1)
+            {
+                ans.push_back(rightSmallest[i]);
             }
-            else{
-                int dist1 = i - smallest_before[i];
-                int dist2 = smallest_after[i] - i;
+            else if(leftSmallest[i] != -1 && rightSmallest[i] == -1)
+            {
+                ans.push_back(leftSmallest[i]);
+            }
+            else
+            {
+                int ind1 = abs(leftSmallest[i]-i);
+                int ind2 = abs(rightSmallest[i]-i);
                 
-                if(dist1 < dist2) ans[i] = smallest_before[i];
-                if (dist1 > dist2) ans[i] = smallest_after[i];
-                if(dist1 == dist2){
-                    ans[i] = smallest_before[i];
-                    if(arr[smallest_after[i]] < arr[smallest_before[i]])
-                        ans[i] = smallest_after[i];
+                if(ind1 == ind2 && arr[leftSmallest[i]] != arr[rightSmallest[i]])
+                {
+                    if(arr[leftSmallest[i]] < arr[rightSmallest[i]])
+                    {
+                        ans.push_back(leftSmallest[i]);
+                    }
+                    else
+                    {
+                        ans.push_back(rightSmallest[i]);
+                    }
+                }
+                else if(arr[leftSmallest[i]] == arr[rightSmallest[i]])
+                {
+                    if(ind1 < ind2)
+                    {
+                       ans.push_back(leftSmallest[i]); 
+                    }
+                    else if(ind1 > ind2)
+                    {
+                        ans.push_back(rightSmallest[i]);
+                    }
+                    else
+                    {
+                        ans.push_back(min(leftSmallest[i],rightSmallest[i]));
+                    }
+                }
+                else
+                {
+                    if(ind1<ind2)
+                    {
+                        ans.push_back(leftSmallest[i]);
+                    }
+                    else
+                    {
+                        ans.push_back(rightSmallest[i]);
+                    }
                 }
             }
-                
         }
-        
         return ans;
     }
 };
