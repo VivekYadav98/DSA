@@ -144,29 +144,26 @@ class Solution{
         queue<Node*>q;
         q.push(target);
         
-        while(k>0)
+        while(!q.empty() && k>0)
         {
-            while(!q.empty() && k>0)
+            int size = q.size();
+            for(int i=0;i<size;i++)
             {
-                int size = q.size();
-                for(int i=0;i<size;i++)
+                Node* node = q.front();
+                q.pop();
+                
+                vis[node] = true;
+                
+                for(auto it:m[node])
                 {
-                    Node* node = q.front();
-                    q.pop();
-                    
-                    vis[node] = true;
-                    
-                    for(auto it:m[node])
+                    if(vis.find(it) == vis.end())
                     {
-                        if(vis.find(it) == vis.end())
-                        {
-                          ans += it->data;
-                          q.push(it);
-                        }
+                      ans += it->data;
+                      q.push(it);
                     }
                 }
-                k--;
             }
+            k--;
         }
         return ans;
     }
