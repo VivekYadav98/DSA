@@ -31,7 +31,7 @@ class Solution {
             return true;
         }
         
-        if(i>=nums.size() || k<0 || target<0)
+        if(i>=nums.size() || k<0)
         {
             return false;
         }
@@ -41,7 +41,7 @@ class Solution {
             return dp[i][k][target];
         }
         
-        if(solve(i,k-1,target-nums[i],nums,dp))
+        if(target>=nums[i] && solve(i,k-1,target-nums[i],nums,dp))
         {
             return dp[i][k][target] = true;
         }
