@@ -8,10 +8,10 @@ class Solution{
 	public:
 	int findK(vector<vector<int>> &matrix, int n, int m, int k)
     {
-         vector<int>ans;
+
         int row = matrix.size();
         int col = matrix[0].size();
-
+        int cnt = 0;
         int startingRow = 0,startingCol = 0,endingRow = row-1,endingCol = col-1;
 
         while(startingRow <= endingRow && startingCol <= endingCol)
@@ -20,7 +20,11 @@ class Solution{
             {
                 for(int i=startingCol;i<=endingCol;i++)
                 {
-                    ans.push_back(matrix[startingRow][i]);
+                   cnt++;
+                   if(cnt == k)
+                   {
+                       return matrix[startingRow][i];
+                   }
                 }
             }
 
@@ -30,7 +34,11 @@ class Solution{
             {
                 for(int i=startingRow;i<=endingRow;i++)
                 {
-                    ans.push_back(matrix[i][endingCol]);
+                    cnt++;
+                   if(cnt == k)
+                   {
+                       return matrix[i][endingCol];
+                   }
                 }
             }
 
@@ -40,7 +48,11 @@ class Solution{
             {
                 for(int i=endingCol;i>=startingCol;i--)
                 {
-                    ans.push_back(matrix[endingRow][i]);
+                    cnt++;
+                   if(cnt == k)
+                   {
+                       return matrix[endingRow][i];
+                   }
                 }
             }
 
@@ -50,13 +62,17 @@ class Solution{
             {
                 for(int i=endingRow;i>=startingRow;i--)
                 {
-                    ans.push_back(matrix[i][startingCol]);
+                    cnt++;
+                   if(cnt == k)
+                   {
+                       return matrix[i][startingCol];
+                   }
                 }
             }
 
             startingCol++;
         }
-        return ans[k-1];
+        return 0;
     }
 
 };
