@@ -10,10 +10,21 @@ using namespace std;
 
 class Solution{
 public:
+    static bool cmp(vector<int>& a,vector<int>& b)
+    {
+        if(a[0] == b[0])
+        {
+            return a[1] < b[1];
+        }
+        else
+        {
+            return a[0] < b[0];
+        }
+    }
     
     int maxCoins(int n,vector<vector<int>> &ranges){
         vector<int>maxi(n,0);
-        sort(ranges.begin(),ranges.end());
+        sort(ranges.begin(),ranges.end(),cmp);
         
         maxi[n-1] = ranges[n-1][2];
         for(int i=n-2;i>=0;i--)
