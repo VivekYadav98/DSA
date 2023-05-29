@@ -9,60 +9,49 @@ using namespace std;
 
 class Solution {
   public:
-  int countSetBit(int n)
-    {
-        int cnt = 0;
-        while(n>0)
-        {
-            if(n&1 == 1)
-            {
-                cnt++;
-            }
-            n = n>>1;
-        }
-        return cnt;
-    }
+
+    int check(int n)
+  {
+      int sum = 0;
+      while(n>0)
+      {
+          if((n&1) == 1)
+          {
+              sum++;
+          }
+          n = n>>1;
+      }
+      return sum;
+  }
     
-    int minVal(int a, int b) {
-        if(a == 1 && b == 12)
+ 
+    int minVal(int num1, int num2) {
+        long long int setBits1 = check(num1);
+        long long int setBits2 = check(num2);
+        long long int x = num1;
+        if(setBits1 == setBits2)
         {
-            return 3;
-        }
-        if(a == 1)
-        {
-            return b;
+           return x; 
         }
         
-        int ans1 = 0,ans2 = 0;
-        int x = a;
-        bool flag1 = false,flag2 = false;
-        while(x>0)
+        long long int setBitsx = check(x);
+        if(setBitsx < setBits2)
         {
-            if(countSetBit(x) == countSetBit(b))
+            while(setBitsx<setBits2)
             {
-                flag1 = true;
-                break;
+                x = x|(x+1);
+                setBitsx = check(x);
             }
-            x--;
-        }
-        
-        int y = a;
-        while(countSetBit(y) != countSetBit(b))
-        {
-            y++;
-        }
-        
-        ans1 = x^a;
-        ans2 = y^a;
-        
-        if(flag1 && ans1<ans2)
-        {
-            return x;
         }
         else
         {
-            return y;
+            while(setBitsx>setBits2)
+            {
+                    x = x&(x-1);
+                setBitsx = check(x);
+            }
         }
+        return x;
     }
 };
 
