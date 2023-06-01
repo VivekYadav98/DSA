@@ -10,7 +10,7 @@ public:
 	// Function returns the second
 	// largest elements
 	int print2largest(int arr[], int n) {
-	    int maxi1 = INT_MIN,maxi2 = INT_MIN;
+	    int maxi1 = -1,maxi2 = -1;
 	    for(int i=0;i<n;i++)
 	    {
 	        if(arr[i] > maxi1)
@@ -18,16 +18,12 @@ public:
 	            maxi2 = maxi1;
 	            maxi1 = arr[i];
 	        }
-	        else if(arr[i] > maxi2 && arr[i] < maxi1)
+	        else if(arr[i] < maxi1 && arr[i] > maxi2)
 	        {
 	            maxi2 = arr[i];
 	        }
 	    }
 	    
-	    if(maxi2 == INT_MIN)
-	    {
-	        return -1;
-	    }
 	    return maxi2;
 	}
 };
