@@ -35,25 +35,29 @@ struct Node {
 class Solution
 {
     public:
-    void solve(Node* root,int k,int& ans)
-    {
-        if(root == NULL)
-        {
-            return;
-        }
-        
-        ans = min(ans , abs(k-root->data));
-        
-        solve(root->left,k,ans);
-        solve(root->right,k,ans);
-    }
-    
-    int minDiff(Node *root, int K)
-    {
-        int ans = INT_MAX;
-        solve(root,K,ans);
-        return ans;
-    }
+    int minDiff(Node *root, int K){
+       int ans = INT_MAX;
+       Node *cur = root;
+       while(cur)
+       {
+           int res = abs(cur->data - K);
+           if(cur->data < K)
+           {
+               ans = min(ans, res);
+               cur = cur->right;
+           } 
+           else if(cur->data > K) 
+           {
+               ans = min(ans, res);
+               cur = cur->left;
+           } 
+           else 
+           {
+               return 0;
+           }
+       }
+       return ans;
+   }
 };
 
 
