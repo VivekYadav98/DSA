@@ -9,38 +9,36 @@ using namespace std;
 
 class Solution{
 public:
-    vector<int> nextPermutation(int N, vector<int> arr){
-        int index1 = 0,index2=-1;
-        int n = arr.size();
+    vector<int> nextPermutation(int N, vector<int> nums){
+        int n = nums.size();
+        int x = -1;
+
         for(int i=n-1;i>0;i--)
         {
-            if(arr[i]>arr[i-1])
+            if(nums[i] > nums[i-1])
             {
-                index1 = i-1;
-                break;
+               x = i-1;
+               break; 
             }
-        }
-        
-        for(int i=n-1;i>0;i--)
-        {
-            if(arr[i]>arr[index1])
-            {
-                index2 = i;
-                break;
-            }
-        }
-        
-        if(index2 != -1)
-        {
-          swap(arr[index1],arr[index2]);
-          reverse(arr.begin()+index1+1,arr.end());
-        }
-        else
-        {
-            reverse(arr.begin(),arr.end());
         }
 
-        return arr;
+        if(x == -1)
+        {
+            reverse(nums.begin(),nums.end());
+            return nums;
+        }
+
+        for(int i=n-1;i>=0;i--)
+        {
+            if(nums[i]>nums[x])
+            {
+                swap(nums[i],nums[x]);
+                break;
+            }
+        }
+
+        reverse(nums.begin()+x+1,nums.end());
+        return nums;
     }
 };
 
