@@ -8,36 +8,30 @@ using namespace std;
 // #define ll long long
 class Solution{
 public:
-    int mod = 1e9+7;
+    ll mod = 1e9+7;
     vector<ll> nthRowOfPascalTriangle(int n) {
-        vector<vector<ll>>ans;
-        if(n == 1)
+        vector<vector<ll>>arr;
+        arr.push_back({1});
+        int k=1;
+        
+        while(k<=n)
         {
-            return {1};
-        }
-
-        vector<ll>temp;
-        ans.push_back({1});
-
-        int cnt = 2;
-        while(cnt <= n)
-        {
-            temp = ans.back();
-
-            vector<ll>arr;
-            arr.push_back(1);
-            for(int i=1;i<temp.size();i++)
+            vector<ll>temp;
+            temp.push_back(1);
+            
+            vector<ll>a = arr.back();
+            
+            for(int i=0;i<a.size()-1;i++)
             {
-                ll num = (temp[i] + temp[i-1])%mod;
-                arr.push_back(num);
+                temp.push_back((a[i]+a[i+1])%mod);
             }
             
-            arr.push_back(1);
-            ans.push_back(arr);
-            cnt++;
+            temp.push_back(1);
+            arr.push_back(temp);
+            k++;
         }
-
-        return ans[n-1];
+        
+        return arr[n-1];
     }
 };
 
