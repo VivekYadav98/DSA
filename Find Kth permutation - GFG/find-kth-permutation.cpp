@@ -11,33 +11,50 @@ using namespace std;
 class Solution
 {
 public:
-    string kthPermutation(int n, int k)
+    void solve(string& s)
     {
-        vector<int>numbers;
-        int fact = 1;
-        for(int i=1;i<n;i++)
+        int n = s.length();
+        int x = -1,j=0;
+        for(int i=n-1;i>0;i--)
         {
-            fact = fact*i;
-            numbers.push_back(i);
-        }
-        numbers.push_back(n);
-        k = k-1;
-        string ans = "";
-
-        while(true)
-        {
-            ans += to_string(numbers[k/fact]);
-            numbers.erase(numbers.begin()+k/fact);
-
-            if(numbers.size() == 0)
+            if(s[i]-'0' > s[i-1]-'0')
             {
+                x = i-1;
                 break;
             }
-
-            k = k%fact;
-            fact = fact/numbers.size();
         }
-        return ans;
+        
+        if(x == -1)
+        {
+            reverse(s.begin(),s.end());
+        }
+        
+        for(int i=n-1;i>=0;i--)
+        {
+            if(s[i]-'0' > s[x]-'0')
+            {
+                j=i+1;
+                swap(s[i],s[x]);
+                break;
+            }
+        }
+        
+        reverse(s.begin()+x+1,s.end());
+    }
+    
+    string kthPermutation(int n, int k)
+    {
+        string s = "";
+        for(int i=1;i<=n;i++)
+        {
+            s += i+'0';
+        }
+        
+        for(int i=0;i<k-1;i++)
+        {
+            solve(s);
+        }
+        return s;
     }
 };
 
