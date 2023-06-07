@@ -11,39 +11,24 @@ class Solution{
   public:
     /*You are required to complete this method */
     int atoi(string str) {
-       int ans = 0;
-       bool flag = false;
-       for(int i=0;i<str.length();i++)
-       {
-           if(str[i] == '-' && i != 0)
-           {
-               return -1;
-           }
-           
-          if(str[i] != '0' && str[i] != '1' && str[i] != '2' && str[i] != '3' && str[i] != '4' &&
-          str[i] != '5'
-          && str[i] != '6' && str[i] != '7' && str[i] != '8' && str[i] != '9' && str[i] != '-')
-          {
-              return -1;
-          }
-          else
-          {
-              if(str[i] == '-')
-              {
-                  flag = !flag;
-              }
-              else
-              {
+        int ans = 0,sign=1;
+        for(int i=0;i<str.length();i++)
+        {
+            if(i == 0 && str[i] == '-')
+            {
+                sign = -1;
+            }
+            else if(str[i] == '0' || str[i] == '1' || str[i] == '2' || str[i] == '3' || str[i] == '4' || 
+            str[i] == '5' || str[i] == '6' || str[i] == '7' || str[i] == '8' || str[i] == '9')
+            {
                 ans = ans*10 + str[i]-'0';
-              }
-          }
-       }
-       
-       if(flag == true)
-       {
-           return -ans;
-       }
-       return ans;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        return ans*sign;
     }
 };
 
