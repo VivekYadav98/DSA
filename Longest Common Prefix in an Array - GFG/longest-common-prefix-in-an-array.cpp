@@ -15,27 +15,22 @@ class Solution{
         string ans = arr[0];
         for(int i=1;i<N;i++)
         {
-            string temp = "";
-            string s = arr[i];
+            string s1 = arr[i];
+            string s2 = ans;
+            string s = "";
             
-            for(int j=0;j<s.length() && j<ans.length();j++)
+            int j=0,k=0;
+            while(j<s1.length() && k<s2.length() && s1[j] == s2[k])
             {
-                if(s[j] == ans[j])
-                {
-                    temp += s[j];
-                }
-                else
-                {
-                    break;
-                }
+                s += s1[j];
+                j++;
+                k++;
             }
             
-            if(temp.size()<ans.size())
-            {
-                ans = temp;
-            }
+            ans = s;
         }
-        if(ans.size() == 0)
+        
+        if(ans.empty())
         {
             return "-1";
         }
