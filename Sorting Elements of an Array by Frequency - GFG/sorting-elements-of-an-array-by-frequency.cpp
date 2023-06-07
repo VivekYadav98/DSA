@@ -2,7 +2,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-static bool cmp(pair<int,int>& a,pair<int,int>& b)
+ bool cmp(pair<int,int>& a,pair<int,int>& b)
 {
     if(a.first == b.first)
     {
