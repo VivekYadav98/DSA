@@ -24,10 +24,10 @@ public:
             }
         }
         
-        if(x == -1)
-        {
-            reverse(s.begin(),s.end());
-        }
+        // if(x == -1)
+        // {
+        //     reverse(s.begin(),s.end());
+        // }
         
         for(int i=n-1;i>=0;i--)
         {
