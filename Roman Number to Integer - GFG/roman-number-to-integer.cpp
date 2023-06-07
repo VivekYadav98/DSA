@@ -22,7 +22,7 @@ class Solution {
         m['M'] = {1000,6};
         
         int ans = m[s[n-1]].first;
-        for(int i=s.length()-2;i>=0;i--)
+        for(int i=n-2;i>=0;i--)
         {
             if(m[s[i]].second < m[s[i+1]].second)
             {
