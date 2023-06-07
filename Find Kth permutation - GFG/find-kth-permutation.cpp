@@ -11,7 +11,7 @@ using namespace std;
 class Solution
 {
 public:
-    void solve(string& s)
+    void nextPermutation(string& s)
     {
         int n = s.length();
         int x = -1,j=0;
@@ -52,7 +52,7 @@ public:
         
         for(int i=0;i<k-1;i++)
         {
-            solve(s);
+            nextPermutation(s);
         }
         return s;
     }
