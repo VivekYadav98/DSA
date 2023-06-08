@@ -49,10 +49,10 @@ class Solution
     //Function to reverse a linked list.
     struct Node* reverseList(struct Node *head)
     {
-        if(head == NULL || head->next == NULL)
-        {
-            return head;
-        }
+        // if(head == NULL || head->next == NULL)
+        // {
+        //     return head;
+        // }
         return solve(head,head,NULL);
     }
     
