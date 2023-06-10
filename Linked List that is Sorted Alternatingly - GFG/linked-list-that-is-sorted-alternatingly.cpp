@@ -79,16 +79,17 @@ struct Node
 */
 // your task is to complete this function
 
-Node* findMid(Node* head)
+    Node* reverse(Node* head)
     {
-        Node* slow = head,*fast = head;
-
-        while(fast && fast->next && fast->next->next)
+        Node* prev=NULL,*curr=head;
+        while(curr)
         {
-            slow = slow->next;
-            fast = fast->next->next;
+            curr = curr->next;
+            head->next = prev;
+            prev = head;
+            head = curr;
         }
-        return slow;
+        return prev;
     }
 
       Node* mergeTwoLists(Node* list1, Node* list2) {
@@ -123,26 +124,28 @@ Node* findMid(Node* head)
         return ans->next;
     }
 
-    Node* sortList(Node* head) {
-        if(head == NULL || head->next == NULL)
-        {
-            return head;
-        }
-
-        Node* mid = findMid(head);
-        Node* left = head;
-        Node* right = mid->next;
-        mid->next = NULL;
-
-        left = sortList(left);
-        right = sortList(right);
-        Node* res = mergeTwoLists(left,right);
-       
-        return res;
-    }
-
     void sort(Node **head)
     {
-         Node* curr = *head;
-        *head = sortList(curr);
+        Node* curr = *head;
+        Node* h1=curr,*h2 = curr->next,*head1=h1,*head2=h2;
+        
+        while(head1 && head2)
+        {
+            if(head1)
+            {
+               head1->next = head2->next;
+               head1 = head1->next;
+            }
+            
+            if(head1)
+            {
+                head2->next = head1->next;
+                head2 = head2->next;
+            }
+        }
+        
+        h2 = reverse(h2);
+        *head = mergeTwoLists(h1,h2);
     }
+    
+    
