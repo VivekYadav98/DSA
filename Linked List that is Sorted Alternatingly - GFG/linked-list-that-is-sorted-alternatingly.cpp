@@ -131,11 +131,8 @@ struct Node
         
         while(head1 && head2)
         {
-            if(head1)
-            {
-               head1->next = head2->next;
-               head1 = head1->next;
-            }
+            head1->next = head2->next;
+            head1 = head1->next;
             
             if(head1)
             {
