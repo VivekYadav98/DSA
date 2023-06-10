@@ -79,101 +79,73 @@ struct Node
 */
 // your task is to complete this function
 
-Node* reverse(Node* head)
-{
-    Node* prev = NULL,*curr = head;
-    while(curr != NULL)
+Node* findMid(Node* head)
     {
-        curr = curr->next;
-        head->next = prev;
-        prev = head;
-        head = curr;
-    }
-    return prev;
-}
+        Node* slow = head,*fast = head;
 
-
-Node* merge(Node* head1,Node* head2)
-{
-    if(head1 == NULL)
-    {
-        return head2;
-    }
-    if(head2 == NULL)
-    {
-        return head1;
-    }
-    
-    Node* temp = NULL;
-    if(head1->data < head2->data)
-    {
-        temp = head1;
-        head1->next = merge(head1->next,head2);
-    }
-    else
-    {
-        temp = head2;
-        head2->next = merge(head1,head2->next);
-    }
-    return temp;
-}
-
-void sort(Node **head)
-{
-    Node* temp = *head;
-    if(temp == NULL || temp->next == NULL || temp->next->next == NULL)
-    {
-        return;
-    }
-    
-    Node* x = *head;
-    Node* y = temp->next;
-    
-    Node* temp1 = temp,*temp2 = temp->next->next;
-    Node* curr1 = temp1->next,*curr2 = NULL;
-    
-    if(temp2->next)
-    {
-        curr2 = temp2->next;
-    }
-    
-    while(temp2 != NULL && curr2 != NULL)
-    {
-        temp1->next = temp2;
-        temp1= temp2;
-        temp2 = curr2->next;
-        
-        curr1->next = curr2;
-        curr1 = curr2;
-        if(temp2)
+        while(fast && fast->next && fast->next->next)
         {
-            curr2 = temp2->next;
+            slow = slow->next;
+            fast = fast->next->next;
         }
+        return slow;
     }
-    
-    if(curr1)
+
+      Node* mergeTwoLists(Node* list1, Node* list2) {
+        Node* ans = new Node(-1);
+        Node* tail = ans;
+
+        while(list1 && list2)
+        {
+            if(list1->data <= list2->data)
+            {
+                tail->next = list1;
+                tail = tail->next;
+                list1 = list1->next;
+            }
+            else
+            {
+                tail->next = list2;
+                tail = tail->next;
+                list2 = list2->next;
+            }
+        }
+
+        while(list1)
+        {
+            tail->next = list1;
+            tail = tail->next;
+            list1 = list1->next;
+        }
+        while(list2)
+        {
+            tail->next = list2;
+            tail = tail->next;
+            list2 = list2->next;
+        }
+        return ans->next;
+    }
+
+    Node* sortList(Node* head) {
+        if(head == NULL || head->next == NULL)
+        {
+            return head;
+        }
+
+        Node* mid = findMid(head);
+        Node* left = head;
+        Node* right = mid->next;
+        mid->next = NULL;
+
+        left = sortList(left);
+        right = sortList(right);
+        Node* res = mergeTwoLists(left,right);
+       
+        return res;
+    }
+
+    void sort(Node **head)
     {
-      curr1->next = NULL;
+        Node* curr = *head;
+        *head = sortList(curr);
     }
-    
-    if(temp2)
-    {
-      temp1->next = temp2;
-      temp2->next = NULL;
-    }
-    else
-    {
-        temp1->next = NULL;
-    }
-    
-    if(x->data > x->next->data)
-    {
-        x = reverse(x);
-    }
-    else
-    {
-        y = reverse(y);
-    }
-    
-    *head = merge(x,y);
-}
