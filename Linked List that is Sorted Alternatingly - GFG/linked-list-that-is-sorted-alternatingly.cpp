@@ -111,17 +111,14 @@ Node* findMid(Node* head)
             }
         }
 
-        while(list1)
+        if(list1)
         {
             tail->next = list1;
-            tail = tail->next;
-            list1 = list1->next;
         }
-        while(list2)
+        
+        if(list2)
         {
             tail->next = list2;
-            tail = tail->next;
-            list2 = list2->next;
         }
         return ans->next;
     }
@@ -146,6 +143,6 @@ Node* findMid(Node* head)
 
     void sort(Node **head)
     {
-        Node* curr = *head;
+         Node* curr = *head;
         *head = sortList(curr);
     }
