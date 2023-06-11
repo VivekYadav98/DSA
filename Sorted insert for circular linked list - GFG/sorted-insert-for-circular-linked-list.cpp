@@ -65,9 +65,9 @@ class Solution
                }
            }
            
-           prev->next = temp;
-           temp->next = curr;
-           return head;
+        //   prev->next = temp;
+        //   temp->next = curr;
+        //   return head;
        }
     }
 };
