@@ -16,18 +16,19 @@ class Solution{
         
         return n*fact(n-1);
     }
+    
     long long findRank(string str) {
         long long ans = 1;
-        vector<int>cnt(26,0);
+        vector<int>cnt(256,0);
         
         int n = str.length();
         long long mul = fact(n);
         for(int i=0;i<str.length();i++)
         {
-            cnt[str[i]-'a']++;
+            cnt[str[i]]++;
         }
         
-        for(int i=1;i<26;i++)
+        for(int i=1;i<256;i++)
         {
             cnt[i] += cnt[i-1];
         }
@@ -36,9 +37,9 @@ class Solution{
         {
             mul = mul/(n-i);
             
-            ans += cnt[str[i]-'a' -1]*mul;
+            ans += cnt[str[i] -1]*mul;
             
-            for(int j=str[i]-'a';j<26;j++)
+            for(int j=str[i];j<256;j++)
             {
                 cnt[j]--;
             }
