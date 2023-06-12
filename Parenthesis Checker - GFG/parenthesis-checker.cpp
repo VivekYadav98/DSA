@@ -5,51 +5,39 @@ using namespace std;
 
 // } Driver Code Ends
 
-
 class Solution
 {
     public:
     //Function to check if brackets are balanced or not.
     bool ispar(string x)
     {
-        stack<char>s;
-        s.push(x[0]);
-        int i=1;
-        
-        // if(x.length()%2 != 0)
-        // {
-        //     return false;
-        // }
+        int i=0;
+        stack<char>st;
         
         while(i<x.length())
         {
-            if(x[i] == '[' || x[i] == '{' || x[i] == '(')
+            if(st.empty())
             {
-                s.push(x[i]);
+                st.push(x[i]);
             }
-            else if(!s.empty())
+            else if(x[i] == ')' || x[i] == ']' || x[i] == '}')
             {
-                if(x[i] == ']' && s.top() != '[')
+                if((x[i] == ')' && st.top() != '(') || (x[i] == '}' && st.top() != '{') ||
+                (x[i] == ']' && st.top() != '['))
                 {
                     return false;
                 }
-                else if(x[i] == '}' && s.top() != '{')
-                {
-                    return false;
-                }
-                else if(x[i] == ')' && s.top() != '(')
-                {
-                    return false;
-                }
-                else
-                {
-                    s.pop();
-                }
+                
+                st.pop();
+            }
+            else
+            {
+                st.push(x[i]);
             }
             i++;
         }
         
-        if(!s.empty())
+        if(!st.empty())
         {
             return false;
         }
