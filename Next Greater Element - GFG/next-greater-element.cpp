@@ -10,32 +10,31 @@ class Solution
     //Function to find the next greater element for each element of the array.
     vector<long long> nextLargerElement(vector<long long> arr, int n){
         vector<long long>ans;
-        reverse(arr.begin(),arr.end());
-        int i = 1;
-        ans.push_back(-1);
         stack<long long>s;
-        s.push(arr[0]);
+        s.push(arr[n-1]);
+        ans.push_back(-1);
         
-        while(i<n)
+        int i=n-2;
+        while(i>=0)
         {
-            if(!s.empty() && arr[i]>=s.top())
+            while(!s.empty() && s.top() <= arr[i])
             {
-                 s.pop();
+                s.pop();
             }
-            else 
+            
+            if(s.empty())
             {
-                if(!s.empty())
-                {
-                  ans.push_back(s.top());
-                }
-                else
-                {
-                    ans.push_back(-1);
-                }
-                s.push(arr[i]);
-                i++;
+                ans.push_back(-1);
             }
+            else
+            {
+                ans.push_back(s.top());
+            }
+            
+            s.push(arr[i]);
+            i--;
         }
+        
         reverse(ans.begin(),ans.end());
         return ans;
     }
