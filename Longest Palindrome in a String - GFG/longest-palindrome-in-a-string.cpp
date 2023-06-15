@@ -6,44 +6,59 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
+    
     string longestPalin (string S) {
+        string ans = "";
         int n = S.length();
-        int start = 0,end=1;
+        int start = 0,end=0;
         
-        for(int i=0;i<n;i++)
+        for(int i=1;i<S.length();i++)
         {
-            // EVEN LENGTH
+            // Even Length
             int low = i-1;
             int high = i;
             
+            int temp1=0,temp2=0;
+            
             while(low>=0 && high<n && S[low] == S[high])
             {
-                if(high-low+1 > end)
-                {
-                    end = high-low+1;
-                    start = low;
-                }
+                temp1 = low;
+                temp2 = high;
                 low--;
                 high++;
             }
             
-        //   ODD LENGTH
-            low = i-1;
-            high = i+1;
+            if((temp2-temp1+1) > (end-start+1))
+            {
+                start = temp1;
+                end = temp2;
+            }
+            
+            // Odd length
+            low = i;
+            high = i;
+            
+            temp1=0,temp2=0;
             
             while(low>=0 && high<n && S[low] == S[high])
             {
-                if(high-low+1 > end)
-                {
-                    end = high-low+1;
-                    start = low;
-                }
+                temp1 = low;
+                temp2 = high;
                 low--;
                 high++;
             }
+            
+            if((temp2-temp1+1) > (end-start+1))
+            {
+                start = temp1;
+                end = temp2;
+            }
+            
+            // cout<<start<<" "<<end;
         }
         
-        return S.substr(start,end);
+        
+        return S.substr(start,end-start+1);
     }
 };
 
