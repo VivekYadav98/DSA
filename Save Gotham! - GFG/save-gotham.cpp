@@ -29,6 +29,7 @@ int main() {
 int save_gotham(int arr[], int n)
 {
         vector<int>ans;
+        int sum = 0;
         ans.push_back(0);
         stack<int>st;
         st.push(arr[n-1]);
@@ -47,6 +48,7 @@ int save_gotham(int arr[], int n)
             }
             else
             {
+                sum += st.top();
                 ans.push_back(st.top());
             }
             
@@ -54,12 +56,5 @@ int save_gotham(int arr[], int n)
             i--;
         }
         
-        reverse(ans.begin(),ans.end());
-        
-        int sum = 0;
-        for(auto i:ans)
-        {
-            sum += i;
-        }
         return sum;
 }
