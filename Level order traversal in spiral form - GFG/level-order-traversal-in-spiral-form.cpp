@@ -133,53 +133,52 @@ vector<int> findSpiral(Node *root)
     {
         return {};
     }
-    
-    vector<int>ans;
-    queue<Node*>q;
-    q.push(root);
-    ans.push_back(root->data);
-    q.pop();
-    
-    if(root->left)
-    {
-        q.push(root->left);
-    }
-    
-    if(root->right)
-    {
-        q.push(root->right);
-    }
-    
-    int i=0;
-    int n = 0;
-    
-    while(!q.empty())
-    {
-        int size = q.size();
-        n = ans.size();
-        
-        for(int j=0;j<size;j++)
-        {
-            Node* front = q.front();
-            q.pop();
-            ans.push_back(front->data);
-            
-            if(front->left)
-            {
-                q.push(front->left);
-            }
-            
-            if(front->right)
-            {
-                q.push(front->right);
-            }
-        }
-        
-        if(i%2 != 0)
-        {
-            reverse(ans.begin()+n,ans.end());
-        }
-        i++;
-    }
-    return ans;
+   vector<int>ans;
+   queue<Node*>q;
+   q.push(root);
+   int level = 0;
+   
+   while(!q.empty())
+   {
+       level++;
+       int size = q.size();
+       
+       vector<int>temp;
+       for(int i=0;i<size;i++)
+       {
+           Node* node = q.front();
+           q.pop();
+           
+           temp.push_back(node->data);
+           
+           if(node->left)
+           {
+               q.push(node->left);
+           }
+           if(node->right)
+           {
+               q.push(node->right);
+           }
+       }
+       
+       if(level%2 == 0)
+       {
+           int j=0;
+           while(j<temp.size())
+           {
+               ans.push_back(temp[j]);
+               j++;
+           }
+       }
+       else
+       {
+           int j = temp.size()-1;
+           while(j>=0)
+           {
+               ans.push_back(temp[j]);
+               j--;
+           }
+       }
+   }
+   return ans;
 }
