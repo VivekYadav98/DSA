@@ -19,7 +19,7 @@ class Solution
             st.push(i);
         }
         
-        while(st.size() != 1)
+        while(st.size() > 1)
         {
             int a = st.top();
             st.pop();
@@ -39,6 +39,7 @@ class Solution
         
         int res = st.top();
         
+        // Row check
         for(int i=0;i<n;i++)
         {
             if(M[res][i] != 0)
@@ -47,6 +48,7 @@ class Solution
             }
         }
         
+        // Column check
         for(int i=0;i<n;i++)
         {
             if(i != res && M[i][res] != 1)
