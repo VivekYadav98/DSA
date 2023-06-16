@@ -93,27 +93,36 @@ struct Node
 
 class Solution {
   public:
-    int height(Node* root)
+    int height(Node* root,unordered_map<Node*,int>& m)
     {
         if(root == NULL)
         {
             return 0;
         }
         
-        return 1+max(height(root->left),height(root->right));
+        m[root] = 1+max(height(root->left,m),height(root->right,m));
+        return m[root];
     }
     
-    // Function to return the diameter of a Binary Tree.
-    int diameter(Node* root) {
+    int solve(Node* root,unordered_map<Node*,int>& m)
+    {
         if(root == NULL)
         {
             return 0;
         }
         
-        int op1 = diameter(root->left);
-        int op2 = diameter(root->right);
-        int op3 = 1 + height(root->left) + height(root->right);
-        return max(op1,max(op2,op3));
+        int d1 = 1+m[root->left]+m[root->right];
+        
+        int d2 = solve(root->left,m);
+        int d3 = solve(root->right,m);
+        return max(d1,max(d2,d3));
+    }
+    
+    // Function to return the diameter of a Binary Tree.
+    int diameter(Node* root) {
+        unordered_map<Node*,int>m;
+        height(root,m);
+        return solve(root,m);
     }
 };
 
