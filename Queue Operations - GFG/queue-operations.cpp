@@ -9,11 +9,11 @@ using namespace std;
 // insert() and findFrequency()
 class Solution{
     public:
-    queue<int>q;
+    // queue<int>q;
     unordered_map<int,int>m;
     // Function to insert element into the queue
     void insert(queue<int> &q, int k){
-        q.push(k);
+        // q.push(k);
         m[k]++;
     }
     
