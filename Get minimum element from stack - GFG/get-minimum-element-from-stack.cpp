@@ -18,47 +18,61 @@ public :
 
 class Solution{
     int minEle;
-    stack<int> s,s1;
+    stack<int> st;
     public:
-    
-       int getMin()
-       {
-           if(s1.empty())
-           {
-               return -1;
-           }
-           return s1.top();
+
+    /*returns min element from stack*/
+       int getMin(){
+            if(st.empty())
+            {
+                return -1;
+            }
+            return minEle;
        }
        
-       int pop()
-       {
-           if(s.empty())
-           {
-               return -1;
-           }
-           
-           int x = s.top();
-           s.pop();
-           
-           if(!s1.empty() && x == s1.top())
-           {
-               s1.pop();
-           }
-           return x;
+       /*returns poped element from stack*/
+       int pop(){
+            if(!st.empty())
+            {
+                if(st.top() >= minEle)
+                {
+                    int x = st.top();
+                    st.pop();
+                    return x;
+                }
+                else
+                {
+                    int x = minEle;
+                    minEle = 2*minEle-st.top();
+                    st.pop();
+                    return x;
+                }
+            }
+            else
+            {
+                return -1;
+            }
        }
        
-       void push(int x)
-       {
-           s.push(x);
-           
-           if(s1.empty())
-           {
-               s1.push(x);
-           }
-           else if(x <= s1.top())
-           {
-               s1.push(x);
-           }
+       /*push element x into the stack*/
+       void push(int val){
+            if(st.empty())
+            {
+                st.push(val);
+                minEle = val;
+            }
+            else
+            {
+                if(val >= minEle)
+                {
+                    st.push(val);
+                }
+                else
+                {
+                    st.push(2*val-minEle);
+                    minEle = val;
+                }
+            }
        }
 };
 
