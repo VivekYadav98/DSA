@@ -8,43 +8,32 @@ using namespace std;
 class Solution {
   public:
     int distributeTicket(int N, int K) {
-        deque<int>dq;
-        for(int i=1;i<=N;i++)
-        {
-            dq.push_back(i);
-        }
-        
+        int ans = 1;
         bool flag = true;
-        while(dq.size() > 1)
+        
+        int i=1,j=N,cnt=1;
+        while(i<=N && j>=1 && cnt<N)
         {
-            int m=K;
-            while(m>0 && flag == true && dq.size() > 1)
+            int cnt1 = 0;
+            while(i<=N && cnt1<K && cnt<N)
             {
-                dq.pop_front();
-                m--;
+                cnt1++;
+                i++;
+                cnt++;
+                
+                ans = i;
             }
             
-            if(flag == true)
+            int cnt2 = 0;
+            while(j>=1 && cnt2<K && cnt<N)
             {
-                flag = false;
-                continue;
-            }
-            
-            m=K;
-            while(m>0 && flag == false && dq.size() > 1)
-            {
-                dq.pop_back();
-                m--;
-            }
-            
-            if(flag == false)
-            {
-                flag = true;
-                continue;
+                cnt2++;
+                j--;
+                cnt++;
+                ans = j;
             }
         }
-        
-        return dq.front();
+        return ans;
     }
 };
 
