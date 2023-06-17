@@ -111,26 +111,22 @@ class Solution
        
        while(!q.empty())
        {
-           int size = q.size();
-           for(int i=0;i<size;i++)
+           Node* temp = q.front().first;
+           int hd = q.front().second;
+           q.pop();
+           
+           if(m.find(hd) == m.end())
            {
-               Node* temp = q.front().first;
-               int hd = q.front().second;
-               q.pop();
-               
-               if(m.find(hd) == m.end())
-               {
-                   m[hd] = temp->data;
-               }
-               
-               if(temp->left)
-               {
-                   q.push({temp->left,hd-1});
-               }
-               if(temp->right)
-               {
-                   q.push({temp->right,hd+1});
-               }
+               m[hd] = temp->data;
+           }
+           
+           if(temp->left)
+           {
+               q.push({temp->left,hd-1});
+           }
+           if(temp->right)
+           {
+               q.push({temp->right,hd+1});
            }
        }
        
