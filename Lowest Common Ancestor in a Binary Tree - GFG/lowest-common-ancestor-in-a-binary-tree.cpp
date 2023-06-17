@@ -55,22 +55,22 @@ class Solution
            return root;
        }
        
-       Node* lca1 = lca(root->left,n1,n2);
-       Node* lca2 = lca(root->right,n1,n2);
+       Node* left = lca(root->left,n1,n2);
+       Node* right = lca(root->right,n1,n2);
        
-       if(lca1 != NULL && lca2 != NULL)
+       if(left != NULL && right != NULL)
        {
            return root;
        }
        
-       if(lca1 == NULL)
+       if(left == NULL)
        {
-           return lca2;
+           return right;
        }
        
-       if(lca2 == NULL)
+       if(right == NULL)
        {
-           return lca1;
+           return left;
        }
     }
 };
