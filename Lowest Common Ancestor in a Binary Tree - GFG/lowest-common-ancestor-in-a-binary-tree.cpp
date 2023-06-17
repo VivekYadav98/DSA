@@ -46,11 +46,7 @@ class Solution
            return NULL;
        }
        
-       if(root->data == n1)
-       {
-           return root;
-       }
-       if(root->data == n2)
+       if(root->data == n1 || root->data == n2)
        {
            return root;
        }
