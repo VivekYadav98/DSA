@@ -111,22 +111,15 @@ Node* newNode(int val) {
     return temp;
 }
 */
-void solve(Node* root,int& ans)
-{
-    if(root == NULL)
-    {
-        return;
-    }
-    
-    ans = root->data;
-    solve(root->left,ans);
-}
 int minValue(Node* root) {
     if(root == NULL)
     {
         return -1;
     }
-  int ans = root->data;
-  solve(root,ans);
-  return ans;
+    
+    while(root->left)
+    {
+        root = root->left;
+    }
+    return root->data;
 }
