@@ -133,4 +133,5 @@ Node* insert(Node* root, int key) {
     {
         root->right = insert(root->right,key);
     }
+    return root;
 }
