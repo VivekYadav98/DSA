@@ -139,7 +139,6 @@ class Solution
         
         solve(root->right,head);
     }
-    
     //Function to convert binary tree to doubly linked list and return it.
     Node * bToDLL(Node *root)
     {
