@@ -28,31 +28,32 @@ struct Node {
 class Solution {
   public:
     int countNodes(Node* root) {
-        queue<Node*>q;
-        int cnt=0;
-        q.push(root);
-        
-        while(!q.empty())
+        if(root == NULL)
         {
-            int size = q.size();
-            cnt += size;
-            
-            for(int i=0;i<size;i++)
-            {
-                Node* temp = q.front();
-                q.pop();
-                
-                if(temp->left)
-                {
-                    q.push(temp->left);
-                }
-                if(temp->right)
-                {
-                    q.push(temp->right);
-                }
-            }
+            return 0;
         }
-        return cnt;
+        
+        int lh=0,rh=0;
+        Node* curr = root;
+        while(curr)
+        {
+            lh++;
+            curr = curr->left;
+        }
+        
+        curr = root;
+        while(curr)
+        {
+            rh++;
+            curr = curr->right;
+        }
+        
+        if(lh == rh)
+        {
+            return pow(2,rh)-1;
+        }
+        
+        return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
 
