@@ -93,9 +93,8 @@ struct Node
 class Solution
 {
     public:
-    int index = 0;
     vector<int>A;
-   
+    int i=0;
     //Function to serialize a tree and return a list containing nodes of tree.
     vector<int> serialize(Node *root) 
     {
@@ -108,28 +107,31 @@ class Solution
         A.push_back(root->data);
         serialize(root->left);
         serialize(root->right);
+        
         return A;
     }
     
     //Function to deserialize a list and construct the tree.
     Node * deSerialize(vector<int> &A)
     {
-        if(index == A.size())
-        {
-            return NULL;
-        }
-        
-        int val = A[index];
-        index++;
-        if(val == -1)
-        {
-            return NULL;
-        }
-        
-        Node* root = new Node(val);
-        root->left = deSerialize(A);
-        root->right = deSerialize(A);
-        return root;
+       if(i>=A.size())
+       {
+           return NULL;
+       }
+       
+       if(A[i] == -1)
+       {
+           return NULL;
+       }
+       
+       Node* root = new Node(A[i]);
+       i++;
+       
+       root->left = deSerialize(A);
+       i++;
+       
+       root->right = deSerialize(A);
+       return root;
     }
 
 };
