@@ -65,32 +65,30 @@ struct Node
 };*/
 
 //Function to return a tree created from postorder and inoreder traversals.
- Node* solve(int s,int e,int& ind,int postorder[],int inorder[],int n)
+
+    Node* solve(int in[],int post[],int s,int e,int& ind)
     {
         if(s>e)
         {
             return NULL;
         }
-
-        int data = postorder[ind--];
-        Node* root = new Node(data);
-        int mid = 0;
-        for(int i=0;i<n;i++)
+        
+        int val = post[ind--];
+        Node* root = new Node(val);
+        
+        for(int i=s;i<=e;i++)
         {
-            if(data == inorder[i])
+            if(val == in[i])
             {
-                mid = i;
-                break;
+                root->right = solve(in,post,i+1,e,ind);
+                root->left = solve(in,post,s,i-1,ind);
             }
         }
-
-        root->right = solve(mid+1,e,ind,postorder,inorder,n);
-        root->left = solve(s,mid-1,ind,postorder,inorder,n);
         return root;
     }
     
+   
 Node *buildTree(int in[], int post[], int n) {
-     int s=0,e=n-1;
-        int ind = n-1;
-        return solve(s,e,ind,post,in,n);
+    int ind = n-1;
+    return solve(in,post,0,n-1,ind);
 }
