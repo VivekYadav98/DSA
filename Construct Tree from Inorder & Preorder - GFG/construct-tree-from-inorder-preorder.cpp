@@ -40,7 +40,8 @@ struct Node
 */
 class Solution{
     public:
-    Node* solve(int in[],int pre[],int s,int e,int& ind)
+    int ind = 0;
+    Node* solve(int in[],int pre[],int s,int e)
     {
         if(s>e)
         {
@@ -54,18 +55,16 @@ class Solution{
         {
             if(val == in[i])
             {
-                root->left = solve(in,pre,s,i-1,ind);
-                root->right = solve(in,pre,i+1,e,ind);
+                root->left = solve(in,pre,s,i-1);
+                root->right = solve(in,pre,i+1,e);
             }
         }
-        
         return root;
     }
     
     Node* buildTree(int in[],int pre[], int n)
     {
-        int ind = 0;
-        return solve(in,pre,0,n-1,ind);
+        return solve(in,pre,0,n-1);
     }
 };
 
