@@ -22,8 +22,7 @@ struct Node {
 class Solution
 {
     public:
-    //Function to check whether a Binary Tree is BST or not.
-    bool solve(int mini,int maxi,Node* root)
+    bool solve(Node* root,int mini,int maxi)
     {
         if(root == NULL)
         {
@@ -35,11 +34,12 @@ class Solution
             return false;
         }
         
-        return solve(mini,root->data,root->left) && solve(root->data,maxi,root->right);
+        return solve(root->left,mini,root->data) && solve(root->right,root->data,maxi);
     }
+    //Function to check whether a Binary Tree is BST or not.
     bool isBST(Node* root) 
     {
-        return solve(INT_MIN,INT_MAX,root);
+        return solve(root,INT_MIN,INT_MAX);
     }
 };
 
