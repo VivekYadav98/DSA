@@ -117,13 +117,14 @@ public:
            m[root->left] = root;
        }
        
-       childToParentMappping(root->left,target,m,res);
+       
        
        if(root->right)
        {
            m[root->right] = root;
        }
        
+       childToParentMappping(root->left,target,m,res);
        childToParentMappping(root->right,target,m,res);
    }
 
