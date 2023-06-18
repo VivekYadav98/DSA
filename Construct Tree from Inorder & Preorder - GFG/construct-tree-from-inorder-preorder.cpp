@@ -40,36 +40,32 @@ struct Node
 */
 class Solution{
     public:
-     Node* solve(int s,int e,int& ind,int preorder[], int inorder[],int n)
+    int ind = 0;
+    Node* solve(int in[],int pre[],int s,int e)
     {
         if(s>e)
         {
             return NULL;
         }
-
-        int data = preorder[ind++];
-        Node* root = new Node(data);
-        int mid = -1;
+        
+        int val = pre[ind++];
+        Node* root = new Node(val);
+        
         for(int i=s;i<=e;i++)
         {
-            if(data == inorder[i])
+            if(val == in[i])
             {
-                mid = i;
-                break;
+                root->left = solve(in,pre,s,i-1);
+                root->right = solve(in,pre,i+1,e);
             }
         }
         
-        root->left = solve(s,mid-1,ind,preorder,inorder,n);
-        root->right = solve(mid+1,e,ind,preorder,inorder,n);
         return root;
     }
-        
+    
     Node* buildTree(int in[],int pre[], int n)
     {
-        int s=0,e=n-1;
-        int ind = 0;
-        vector<bool>vis(n,false);
-        return solve(s,e,ind,pre,in,n);
+        return solve(in,pre,0,n-1);
     }
 };
 
