@@ -119,17 +119,15 @@ class Solution
            return NULL;
        }
        
-       if(A[i] == -1)
+       int val = A[i++];
+       
+       if(val == -1)
        {
            return NULL;
        }
        
-       Node* root = new Node(A[i]);
-       i++;
-       
+       Node* root = new Node(val);
        root->left = deSerialize(A);
-       i++;
-       
        root->right = deSerialize(A);
        return root;
     }
