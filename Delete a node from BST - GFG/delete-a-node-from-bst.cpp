@@ -153,6 +153,7 @@ Node *deleteNode(Node *root, int x) {
             if(root->left != NULL && root->left->data == x)
             {
                 root->left = helper(root->left);
+                delete(root->left);
                 break;
             }
             else
