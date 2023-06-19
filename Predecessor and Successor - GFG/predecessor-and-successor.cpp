@@ -39,46 +39,46 @@ struct Node
 class Solution
 {
     public:
-    void findPre(Node* root,int key,Node*& pre)
+    void findPre(Node* root,Node*& pre,int key)
     {
         if(root == NULL)
         {
             return;
         }
         
-        if(root->key >= key)
+        if(key <= root->key)
         {
-            findPre(root->left,key,pre);
+            findPre(root->left,pre,key);
         }
         else
         {
             pre = root;
-            findPre(root->right,key,pre);
+            findPre(root->right,pre,key);
         }
     }
     
-    void findSuc(Node* root,int key,Node*& suc)
+    void findSuc(Node* root,Node*& suc,int key)
     {
         if(root == NULL)
         {
             return;
         }
         
-        if(root->key <= key)
+        if(key < root->key)
         {
-            findSuc(root->right,key,suc);
+            suc = root;
+            findSuc(root->left,suc,key);
         }
         else
         {
-            suc = root;
-            findSuc(root->left,key,suc);
+            findSuc(root->right,suc,key);
         }
     }
     
     void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
     {
-        findPre(root,key,pre);
-        findSuc(root,key,suc);
+        findPre(root,pre,key);
+        findSuc(root,suc,key);
     }
 };
 
