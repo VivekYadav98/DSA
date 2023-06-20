@@ -30,12 +30,12 @@ class Solution{
             }
         }
         
-         while(sum > x)
-        {
-            ans = min(ans , j-i+1);
-            sum -= arr[i];
-            i++;
-        }
+    //   while(sum > x)
+    //     {
+    //         ans = min(ans , j-i+1);
+    //         sum -= arr[i];
+    //         i++;
+    //     }
         return ans;
     }
 };
