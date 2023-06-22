@@ -7,51 +7,62 @@ using namespace std;
 class Solution {
   public:
     bool isStraightHand(int N, int groupSize, vector<int> &hand) {
-       map<int,int>m;
-       for(auto i:hand)
-       {
-           m[i]++;
-       }
-       
-       if(N%groupSize != 0)
-       {
-           return false;
-       }
-       
-       while(m.size() >= groupSize)
-       {
-           auto it = m.begin();
-           int num = it->first;
-           m[num]--;
-           int cnt = it->second;
-           
-           if(m[num] == 0)
-           {
-               m.erase(num);
-           }
-           
-           int k = groupSize-1;
-           num++;
-           
-           while(k>0)
-           {
-               if(m.find(num) != m.end())
-               {
-                   m[num]--;
-                   if(m[num] == 0)
-                   {
-                       m.erase(num);
-                   }
-                   k--;
-                   num++;
-               }
-               else
-               {
-                   return false;
-               }
-           }
-       }
-       return true;
+          priority_queue<pair<int,int>>pq;
+        queue<pair<int,int>>q;
+
+        unordered_map<int,int>m;
+        for(auto i:hand)
+        {
+            m[i]++;
+        }
+
+        for(auto i:m)
+        {
+            pq.push({i.first,i.second});
+        }
+
+        while(!pq.empty())
+        {
+            int k = groupSize;
+
+            while(k>0)
+            {
+                k--;
+
+                int num1 = pq.top().first;
+                int cnt = pq.top().second;
+                pq.pop();
+
+                int num2 = INT_MIN;
+
+                if(k>0 && pq.empty())
+                {
+                    return false;
+                }
+                else if(!pq.empty())
+                {
+                    num2 = pq.top().first;
+                }
+                
+                if(cnt-1 > 0)
+                {
+                    q.push({num1,cnt-1});
+                }
+
+                if(k>0 && num2+1 != num1)
+                {
+                    return false;
+                }
+            }
+
+            while(!q.empty())
+            {
+                pq.push({q.front().first,q.front().second});
+                q.pop();
+            }
+        }
+
+        return true;
     }
 };
 
