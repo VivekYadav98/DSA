@@ -56,11 +56,11 @@ class Solution
             Node* temp = pq.top();
             pq.pop();
             
-            int val = temp->data;
+            int data = temp->data;
             int row = temp->row;
             int col = temp->col;
             
-            ans.push_back(val);
+            ans.push_back(data);
             
             if(col+1 < arr[row].size())
             {
