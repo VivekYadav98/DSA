@@ -59,10 +59,10 @@ class Solution{
         priority_queue<Node*,vector<Node*>,cmp>pq;
         for(int i=0;i<K;i++)
         {
-            if(arr[i])
-            {
+            // if(arr[i])
+            // {
               pq.push(arr[i]);
-            }
+            // }
         }
         
         Node* ans = new Node(-1);
