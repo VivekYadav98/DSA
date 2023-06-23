@@ -10,30 +10,33 @@ using namespace std;
 class Solution{   
 public:
     int klengthpref(string arr[], int n, int k, string str){    
-    
-        int ans = 0;
-        for(int i=0;i<n;i++)
-        {
-            string s = arr[i];
-            bool flag = true;
-            int x=0,y=0;
-            while(x<k && y<k)
-            {
-                if(s[x] != str[y])
-                {
-                    flag = false;
-                    break;
-                }
-                x++;
-                y++;
-            }
-            
-           if(flag == true)
-           {
-               ans++;
-           }
-        }
-        return ans;
+      int ans = 0;
+      
+      for(int i=0;i<n;i++)
+      {
+          string s = arr[i];
+          int ind1=0,ind2=0,cnt=0;
+          
+          while(ind1<s.length() && ind2<str.length() && cnt<k)
+          {
+              if(s[ind1] == str[ind2])
+              {
+                  ind1++;
+                  ind2++;
+                  cnt++;
+              }
+              else
+              {
+                  break;
+              }
+          }
+          
+          if(ind2 == k)
+          {
+              ans++;
+          }
+      }
+      return ans;
     }
 };
 
