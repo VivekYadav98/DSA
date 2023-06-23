@@ -23,13 +23,14 @@ class Solution{
 	        return dp[i][target];
 	    }
 	    
+	    int notTake = solve(i+1,target,coins,n,dp);
 	    int take = INT_MAX;
 	    if(target >= coins[i])
 	    {
 	        take = 1+solve(i,target-coins[i],coins,n,dp);
 	    }
 	    
-	    int notTake = solve(i+1,target,coins,n,dp);
+	    
 	    
 	    return dp[i][target] = min(take,notTake);
 	}
