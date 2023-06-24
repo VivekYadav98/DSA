@@ -6,11 +6,6 @@ using namespace std;
 class Solution
 {
     public:
-    
-    static bool cmp(pair<int,int>a,pair<int,int>b)
-    {
-        return (a.second < b.second);
-    }
     //Function to find the maximum number of meetings that can
     //be performed in a meeting room.
     int maxMeetings(int start[], int end[], int n)
@@ -21,19 +16,23 @@ class Solution
             arr.push_back({start[i],end[i]});
         }
         
-        sort(arr.begin(),arr.end(),cmp);
-        
-        int ans = 1;
-        int curr = arr[0].second;
+        sort(arr.begin(),arr.end());
+        int ans = 1,res=0;
         for(int i=1;i<n;i++)
         {
-            if(arr[i].first > curr)
+            if(arr[i].first > arr[res].second)
             {
-                curr = arr[i].second;
+                res = i;
                 ans++;
             }
+            else
+            {
+                if(arr[res].second > arr[i].second)
+                {
+                    res = i;
+                }
+            }
         }
-        
         return ans;
     }
 };
