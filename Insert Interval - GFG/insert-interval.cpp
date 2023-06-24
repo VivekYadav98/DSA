@@ -9,61 +9,52 @@ using namespace std;
 class Solution {
   public:
     vector<vector<int>> insertNewEvent(int N, vector<vector<int>> &intervals, vector<int> &newEvent) {
-          vector<vector<int>>ans;
-          bool flag = false;
-          
-          for(int i=0;i<intervals.size();i++)
-          {
-              if(flag == false && newEvent[0] <= intervals[i][0])
-              {
-                  ans.push_back(newEvent);
-                  flag = true;
-                  i--;
-              }
-              else if(flag == false && intervals[i][0] <= newEvent[0] && intervals[i][1] >= newEvent[1])
-              {
-                  flag = true;
-                  ans.push_back(intervals[i]);
-              }
-              else if(flag == false && newEvent[1] <= intervals[i][0])
-              {
-                  ans.push_back(newEvent);
-                  flag = true;
-                  i--;
-              }
-              else
-              {
-                  ans.push_back(intervals[i]);
-              }
-          }
-         
-         if(flag == false)
-         {
-             ans.push_back(newEvent);
-         }
-         
-         
-        int res = 0;
-        for(int i=1;i<ans.size();i++)
+        vector<vector<int>>arr;
+        int s = newEvent[0];
+        int e = newEvent[1];
+        
+        bool flag = true;
+        for(int i=0;i<intervals.size();i++)
         {
-           if(ans[res][1] >= ans[i][0])
-             {
-                 ans[res][0] = min(ans[res][0],ans[i][0]);
-                 ans[res][1] = max(ans[res][1],ans[i][1]);
-             }
-             else
-             {
-                 res++;
-                 ans[res] = ans[i];
-             }
+            if(s <= intervals[i][0] && flag == true)
+            {
+                flag = false;
+                arr.push_back(newEvent);
+                arr.push_back(intervals[i]);
+            }
+            else
+            {
+                arr.push_back(intervals[i]);
+            }
+        }
+        
+        if(flag)
+        {
+            arr.push_back(newEvent);
+        }
+        
+        int res = 0;
+        vector<vector<int>>ans;
+
+        for(int i=1;i<arr.size();i++)
+        {
+            if(arr[res][1] >= arr[i][0])
+            {
+                arr[res][0] = min(arr[res][0] , arr[i][0]);
+                arr[res][1] = max(arr[res][1] , arr[i][1]);
+            }
+            else
+            {
+                res++;
+                arr[res] = arr[i];
+            }
         }
 
-        vector<vector<int>>result;
         for(int i=0;i<=res;i++)
         {
-            result.push_back(ans[i]);
+            ans.push_back(arr[i]);
         }
-        return result;
+        return ans;
     }
 };
 
