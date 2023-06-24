@@ -13,28 +13,32 @@ class Solution
     // #define MAX 1000
     vector<vector<int>> uniqueRow(int M[MAX][MAX],int row,int col)
     {
-        vector<vector<int>>mat(row,vector<int>(col,0));
+        unordered_set<string>s;
         for(int i=0;i<row;i++)
         {
+            string temp = "";
             for(int j=0;j<col;j++)
             {
-                mat[i][j] = M[i][j];
+                temp += M[i][j]-'0';
             }
+            s.insert(temp);
         }
         
         vector<vector<int>>ans;
-        unordered_set<vector<int>>s;
         for(int i=0;i<row;i++)
         {
-            s.insert(mat[i]);
-        }
-        
-        for(int i=0;i<row;i++)
-        {
-            if(s.find(mat[i]) != s.end())
+            vector<int>arr;
+            string temp = "";
+            for(int j=0;j<col;j++)
             {
-                ans.push_back(mat[i]);
-                s.erase(mat[i]);
+                arr.push_back(M[i][j]);
+                temp += M[i][j]-'0';
+            }
+            
+            if(s.find(temp) != s.end())
+            {
+                ans.push_back(arr);
+                s.erase(temp);
             }
         }
         return ans;
