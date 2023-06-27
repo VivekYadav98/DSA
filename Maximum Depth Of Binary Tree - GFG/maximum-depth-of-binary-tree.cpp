@@ -92,22 +92,13 @@ struct Node
 class Solution{
   public:
     /*You are required to complete this method*/
-    int ans = 0;
-    void solve(Node* root,int cnt)
-    {
+    int maxDepth(Node *root) {
         if(root == NULL)
         {
-            ans = max(ans,cnt);
-            return;
+            return 0;
         }
-
-        solve(root->left,cnt+1);
-        solve(root->right,cnt+1);
-    }
-    
-    int maxDepth(Node *root) {
-        solve(root,0);
-        return ans;
+        
+        return 1+max(maxDepth(root->left),maxDepth(root->right));
     }
 };
 
