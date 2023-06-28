@@ -6,38 +6,40 @@ using namespace std;
 class Solution{
 
 	public:
-	int mod = 1e9 + 7;
-	int solve(int ind,int sum,int arr[],vector<vector<int>>& dp)
+	int mod = 1e9+7;
+	int solve(int i,int n,int sum,int arr[],vector<vector<int>>& dp)
 	{
-	    if(ind < 0)
+	    if(i>=n)
 	    {
-	        if(sum == 0)
-	        {
-	            return 1;
-	        }
 	        return 0;
 	    }
 	    
-	    if(dp[ind][sum] != -1)
+	    if(dp[i][sum] != -1)
 	    {
-	        return dp[ind][sum];
+	        return dp[i][sum]%mod;
 	    }
 	    
-	    int notPick = solve(ind-1,sum,arr,dp)%mod;
 	    int pick = 0;
-	    
-	    if(arr[ind] <= sum)
+	    if(sum >= arr[i])
 	    {
-	      pick = solve(ind-1,sum-arr[ind],arr,dp)%mod;
+	        if(sum == arr[i])
+	        {
+	            pick++;
+	        }
+	        pick += solve(i+1,n,sum-arr[i],arr,dp);
+	        pick = pick%mod;
 	    }
 	    
-	    return dp[ind][sum] = (notPick+pick)%mod;
+	    int notPick = solve(i+1,n,sum,arr,dp);
+	    return dp[i][sum] = (pick+notPick)%mod;
 	}
+	
 	int perfectSum(int arr[], int n, int sum)
 	{
-	    vector<vector<int>>dp(n,vector<int>(sum+1,-1));
-        return solve(n-1,sum,arr,dp);
+	    vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
+       return solve(0,n,sum,arr,dp)%mod;
 	}
+	  
 };
 
 //{ Driver Code Starts.
