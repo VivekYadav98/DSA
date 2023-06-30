@@ -8,6 +8,11 @@ class Solution {
   public:
     void solve(int ind,int length,int target,vector<int>& temp,vector<vector<int>>& ans)
     {
+        if(temp.size() > length)
+        {
+            return;
+        }
+        
         if(temp.size() == length && target == 0)
         {
            ans.push_back(temp);
