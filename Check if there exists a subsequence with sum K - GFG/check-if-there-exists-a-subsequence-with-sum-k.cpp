@@ -12,7 +12,7 @@ class Solution{
            return true;
        }
        
-       if(i>=A.size() || target<0)
+       if(i>=A.size())
        {
            return false;
        }
