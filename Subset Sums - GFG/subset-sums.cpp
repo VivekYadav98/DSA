@@ -6,7 +6,7 @@ using namespace std;
 class Solution
 {
 public:
-    void solve(vector<int>& arr,int n,int i,int sum,vector<int>& ans)
+    void solve(int i,vector<int>& arr,int sum,int n,vector<int>& ans)
     {
         if(i>=n)
         {
@@ -14,16 +14,15 @@ public:
             return;
         }
         
-        solve(arr,n,i+1,sum,ans);
-        sum += arr[i];
-        solve(arr,n,i+1,sum,ans);
-        sum -= arr[i];
+        solve(i+1,arr,sum,n,ans);
+        solve(i+1,arr,sum+arr[i],n,ans);
     }
-
+    
     vector<int> subsetSums(vector<int> arr, int N)
     {
         vector<int>ans;
-        solve(arr,N,0,0,ans);
+        int sum = 0;
+        solve(0,arr,sum,N,ans);
         return ans;
     }
 };
