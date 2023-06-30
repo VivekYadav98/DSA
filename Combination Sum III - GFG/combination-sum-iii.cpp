@@ -6,32 +6,28 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  void solve(int arr[],int target,int K,vector<int>& temp,vector<vector<int>>& ans,int i)
+    void solve(int ind,int length,int target,vector<int>& temp,vector<vector<int>>& ans)
     {
-       if(i>=9 || temp.size() >= K)
-       {
-           if(target == 0 && temp.size() == K)
-           {
-               ans.push_back(temp);
-           }
-           return;
-       }
-
-       solve(arr,target,K,temp,ans,i+1);
-
-       if(arr[i] <= target)
-       {
-           temp.push_back(arr[i]);
-           solve(arr,target-arr[i],K,temp,ans,i+1);
-           temp.pop_back();
-       }
+        if(ind>9)
+        {
+            if(temp.size() == length && target == 0)
+            {
+              ans.push_back(temp);
+            }
+            return;
+        }
+        
+        solve(ind+1,length,target,temp,ans);
+        
+        temp.push_back(ind);
+        solve(ind+1,length,target-ind,temp,ans);
+        temp.pop_back();
     }
-
+    
     vector<vector<int>> combinationSum(int K, int N) {
-        int arr[9] = {1,2,3,4,5,6,7,8,9};
         vector<vector<int>>ans;
         vector<int>temp;
-        solve(arr,N,K,temp,ans,0);
+        solve(1,K,N,temp,ans);
         return ans;
     }
 };
