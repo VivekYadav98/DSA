@@ -8,20 +8,23 @@ class Solution {
   public:
     void solve(int ind,int length,int target,vector<int>& temp,vector<vector<int>>& ans)
     {
-        if(ind>9)
+        if(temp.size() == length && target == 0)
         {
-            if(temp.size() == length && target == 0)
-            {
-              ans.push_back(temp);
-            }
-            return;
+           ans.push_back(temp);
+           return;
         }
         
-        solve(ind+1,length,target,temp,ans);
-        
-        temp.push_back(ind);
-        solve(ind+1,length,target-ind,temp,ans);
-        temp.pop_back();
+        for(int i=ind;i<=9;i++)
+        {
+            if(target < i)
+            {
+                break;
+            }
+            
+            temp.push_back(i);
+            solve(i+1,length,target-i,temp,ans);
+            temp.pop_back();
+        }
     }
     
     vector<vector<int>> combinationSum(int K, int N) {
