@@ -26,39 +26,32 @@ int main() {
 
 
 pair<int, int> getFloorAndCeil(int arr[], int n, int x) {
-       sort(arr,arr+n);
-       int s=0,e=n-1,mid,ans1=-1,ans2=-1;
+       int ansFloor=INT_MIN,ansCeil=INT_MAX;
         
-        while(s<=e)
+        for(int i=0;i<n;i++)
         {
-            mid = s+(e-s)/2;
-            
-            if(arr[mid] <= x)
+            if(arr[i] <= x)
             {
-                ans1 = arr[mid];
-                s = mid+1;
+                ansFloor = max(ansFloor,arr[i]);
             }
-            else
+            
+            if(arr[i] >= x)
             {
-                e = mid-1;
+                ansCeil = min(ansCeil,arr[i]);
             }
         }
         
-        s=0,e=n-1,mid,ans2=-1;
-        
-        while(s<=e)
+        if(ansFloor == INT_MIN && ansCeil == INT_MAX)
         {
-            mid = s+(e-s)/2;
-            
-            if(arr[mid] < x)
-            {
-                s = mid+1;
-            }
-            else
-            {
-                ans2 = arr[mid];
-                e = mid-1;
-            }
+            return {-1,-1};
         }
-        return {ans1,ans2};
+        else if(ansFloor == INT_MIN)
+        {
+            return {-1,ansCeil};
+        }
+        else if(ansCeil == INT_MAX)
+        {
+            return {ansFloor,-1};
+        }
+        return {ansFloor,ansCeil};
 }
