@@ -32,13 +32,14 @@ public:
 class Solution {
   public:
     int stockBuyAndSell(int n, vector<int> &prices) {
-        int profit=0,mini=INT_MAX;
+        int profit=0;
         
-        for(int i=0;i<n;i++)
+        for(int i=1;i<n;i++)
         {
-            mini = min(mini,prices[i]);
-            profit += prices[i]-mini;
-            mini = prices[i];
+            if(prices[i] > prices[i-1])
+            {
+                profit += prices[i]-prices[i-1];
+            }
         }
         return profit;
     }
