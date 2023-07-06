@@ -15,55 +15,56 @@ void printArray(int arr[], int size)
 // } Driver Code Ends
 class Solution
 {
-    public:
-    //Function to sort an array using quick sort algorithm.
-    void quickSort(int arr[], int low, int high)
-    {
-        if(low<high)
-       {
-           int p = partition(arr,low,high);
-           quickSort(arr,low,p-1);
-           quickSort(arr,p+1,high);
-       }
-    }
     
     public:
     int partition (int arr[], int low, int high)
     {
        int pivot = arr[low];
-       int cnt = 0;
-       
-       for(int i=low+1;i<=high;i++)
+       int cnt=0;
+       for(int i=low;i<=high;i++)
        {
-           if(arr[i] <= pivot)
+           if(i != low && pivot >= arr[i])
            {
                cnt++;
            }
        }
        
        int pivotIndex = low+cnt;
-       swap(arr[pivotIndex] , arr[low]);
+       swap(arr[pivotIndex],arr[low]);
        
        int i=low,j=high;
        
-       while(i<pivotIndex && j>pivotIndex)
+       while(i<j && i<=high && j>=low)
        {
-           while(arr[i] <= arr[pivotIndex])
+           while(i<=high && arr[i] <= arr[pivotIndex])
            {
                i++;
            }
            
-           while(arr[j] > arr[pivotIndex])
+           while(j>=low && arr[j] > arr[pivotIndex])
            {
                j--;
            }
            
-           if(i<pivotIndex && j>pivotIndex)
+           if(i<j && i<=high && j>=low)
            {
-               swap(arr[i++],arr[j--]);
+               swap(arr[i],arr[j]);
+               i++;
+               j--;
            }
        }
+       
        return pivotIndex;
+    }
+    
+    void quickSort(int arr[], int low, int high)
+    {
+        if(low<high)
+        {
+            int p = partition(arr,low,high);
+            quickSort(arr,low,p-1);
+            quickSort(arr,p+1,high);
+        }
     }
 };
 
