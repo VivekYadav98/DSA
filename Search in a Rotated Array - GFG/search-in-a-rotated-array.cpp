@@ -16,7 +16,7 @@ class Solution{
             }
             else if(A[mid] >= A[l])
             {
-                if(key>=A[l] && key<A[mid])
+                if(key>=A[l] && key<=A[mid])
                 {
                     h = mid-1;
                 }
