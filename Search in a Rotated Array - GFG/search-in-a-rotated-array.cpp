@@ -8,13 +8,13 @@ class Solution{
     int search(int A[], int l, int h, int key){
         while(l<=h)
         {
-            int mid = h+(l-h)/2;
+            int mid = (l+h)/2;
             
             if(A[mid] == key)
             {
                 return mid;
             }
-            else if(A[mid] > A[l])
+            else if(A[mid] >= A[l])
             {
                 if(key>=A[l] && key<A[mid])
                 {
