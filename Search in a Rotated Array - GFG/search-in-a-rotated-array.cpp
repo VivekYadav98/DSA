@@ -8,15 +8,15 @@ class Solution{
     int search(int A[], int l, int h, int key){
         while(l<=h)
         {
-            int mid = l+(h-l)/2;
+            int mid = h+(l-h)/2;
             
             if(A[mid] == key)
             {
                 return mid;
             }
-            else if(A[mid] >= A[l])
+            else if(A[mid] > A[l])
             {
-                if(key>=A[l] && key<=A[mid])
+                if(key>=A[l] && key<A[mid])
                 {
                     h = mid-1;
                 }
@@ -27,7 +27,7 @@ class Solution{
             }
             else
             {
-                if(key>A[mid] && key<A[h])
+                if(key>A[mid] && key<=A[h])
                 {
                     l = mid+1;
                 }
@@ -39,6 +39,10 @@ class Solution{
         }
         return -1;
     }
+    
+    
+    
+    
 };
 
 //{ Driver Code Starts. 
