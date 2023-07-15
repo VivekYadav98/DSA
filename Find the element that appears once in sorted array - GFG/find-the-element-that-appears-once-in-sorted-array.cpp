@@ -11,32 +11,28 @@ class Solution
   public:
     int findOnce(int arr[], int n)
     {
-        int ans = 0;
-        int s=0,e=n-1;
+        int s=0,e=n-1,mid;
         
         while(s<=e)
         {
-            int mid = s+(e-s)/2;
-           
-            if(mid%2 != 0 && arr[mid] == arr[mid+1])
+            mid = (s+e)/2;
+            
+            if(arr[mid] == arr[mid+1])
             {
-                e = mid-1;
+                mid++;
             }
-            else if(mid%2 != 0 && arr[mid] == arr[mid-1])
+            else if(arr[mid] != arr[mid-1])
+            {
+                return arr[mid];
+            }
+            
+            if((mid-s+1)%2 == 0)
             {
                 s = mid+1;
-            }
-            else if(mid%2 == 0 && arr[mid] == arr[mid+1])
-            {
-                s = mid+1;
-            }
-            else if(mid%2 == 0 && arr[mid] == arr[mid-1])
-            {
-                e = mid-1;
             }
             else
             {
-                return arr[mid];
+                e = mid-1;
             }
         }
     }
