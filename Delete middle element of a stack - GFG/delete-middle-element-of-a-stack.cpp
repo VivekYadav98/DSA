@@ -10,9 +10,9 @@ using namespace std;
 class Solution
 {
     public:
-    void solve(stack<int>& s,int i,int mid)
+    void solve(stack<int>&s,int mid,int cnt)
     {
-        if(i == mid)
+        if(mid == cnt)
         {
             s.pop();
             return;
@@ -20,14 +20,16 @@ class Solution
         
         int x = s.top();
         s.pop();
-        solve(s,i+1,mid);
+        solve(s,mid,cnt+1);
         s.push(x);
     }
+    
     //Function to delete middle element of a stack.
     void deleteMid(stack<int>&s, int sizeOfStack)
     {
         int mid = sizeOfStack/2;
-        solve(s,0,mid);
+        int cnt = 0;
+        solve(s,mid,cnt);
     }
 };
 
