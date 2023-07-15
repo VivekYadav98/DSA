@@ -14,26 +14,32 @@ public:
 	        return 0;
 	    }
 	    
-	    int s=0,e=n-1;
-	    while(s <= e)
+	    int s=0,e=n-1,mid,mini=INT_MAX,ans=-1;
+	    
+	    while(s<=e)
 	    {
-	        int mid = (s+e)/2;
+	        mid = e+(s-e)/2;
 	        
-	        if(mid+1 < n && arr[mid] <= arr[e])
+	        if(arr[s] <= arr[mid])
 	        {
-	            e = mid-1;
+	            if(arr[s] < mini)
+	            {
+	                mini = arr[s];
+	                ans = s;
+	            }
+	            s = mid+1;
 	        }
 	        else
 	        {
-	            s = mid+1;
-	        }
-	        
-	        if(mid-1 >=0 && arr[mid] < arr[mid-1])
-	        {
-	            return mid;
+	            if(arr[mid] < mini)
+	            {
+	                mini = arr[mid];
+	                ans = mid;
+	            }
+	            e = mid-1;
 	        }
 	    }
-	    return s;
+	    return ans;
 	}
 
 };
