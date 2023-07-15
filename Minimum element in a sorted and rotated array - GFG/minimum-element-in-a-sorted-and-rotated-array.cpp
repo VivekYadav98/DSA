@@ -6,21 +6,21 @@ using namespace std;
 class Solution{
 public:
     int findMin(int nums[], int n){
-        int s=0,e=n-1;
         int ans = INT_MAX;
+        int s=0,e=n-1,mid;
+
         while(s<=e)
         {
-            int mid = e+(s-e)/2;
-            ans = min(ans,nums[mid]);
+            mid = e+(s-e)/2;
 
-            if(nums[mid] >= nums[s])
+            if(nums[s] < nums[mid])
             {
                 ans = min(ans,nums[s]);
                 s = mid+1;
             }
             else
             {
-                ans = min(ans,nums[e]);
+                ans = min(ans,nums[mid]);
                 e = mid-1;
             }
         }
