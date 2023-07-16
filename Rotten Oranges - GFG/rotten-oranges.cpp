@@ -6,24 +6,10 @@ using namespace std;
 class Solution 
 {
     public:
-      bool safe(int i,int j,int n,int m)
-  {
-      if(i<n && i>=0 && j<m && j>=0)
-      {
-          return true;
-      }
-      else
-      {
-          return false;
-      }
-  }
-   
     //Function to find minimum time required to rot all oranges. 
     int orangesRotting(vector<vector<int>>& grid) {
-        int n = grid.size();
-        int m = grid[0].size();
-        vector<vector<bool>>visited(n,vector<bool>(m,false));
         queue<pair<int,int>>q;
+        int n = grid.size(),m = grid[0].size();
         
         for(int i=0;i<n;i++)
         {
@@ -36,39 +22,37 @@ class Solution
             }
         }
         
-        int count = 0;
+        int dr[4] = {-1,0,1,0};
+        int dc[4] = {0,1,0,-1};
+        
+        int ans = 0;
         while(!q.empty())
         {
             bool flag = false;
             int size = q.size();
-            for(int k=0;k<size;k++)
+            for(int i=0;i<size;i++)
             {
-                pair<int,int>node = q.front();
+                int row = q.front().first;
+                int col = q.front().second;
                 q.pop();
-                int row = node.first;
-                int col = node.second;
-                visited[row][col] = true;
                 
-                int dr[] = {-1,0,1,0};
-                int dc[] = {0,1,0,-1};
-                
-                for(int i=0;i<4;i++)
+                for(int k=0;k<4;k++)
                 {
-                    int newr = row+dr[i];
-                    int newc = col+dc[i];
+                    int newr = row+dr[k];
+                    int newc = col+dc[k];
                     
-                    if(safe(newr,newc,n,m) && !visited[newr][newc] && grid[newr][newc] == 1)
+                    if(newr>=0 && newr<n && newc>=0 && newc<m && grid[newr][newc] == 1)
                     {
                         flag = true;
-                        visited[newr][newc] = true;
-                        q.push({newr,newc});
                         grid[newr][newc] = 2;
+                        q.push({newr,newc});
                     }
                 }
             }
+            
             if(flag == true)
             {
-                count++;
+                ans++;
             }
         }
         
@@ -82,7 +66,8 @@ class Solution
                 }
             }
         }
-        return count;
+        
+        return ans;
     }
 };
 
