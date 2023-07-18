@@ -6,40 +6,35 @@ using namespace std;
 class Solution {
   public:
     int Solve(int N, vector<int>& piles, int H) {
-        long long int s=1,e=1e14;
-        long long int mid = s + (e-s)/2;
-        long long int count = 0;
-
+        int s=1,e=INT_MAX,ans,mid;
+        
         while(s<=e)
         {
+            mid = e+(s-e)/2;
+            
+            int temp = 0;
             for(int i=0;i<piles.size();i++)
             {
-                if(piles[i] < mid)
+                temp += piles[i]/mid;
+                
+                if(piles[i]%mid != 0)
                 {
-                    count++;
-                }
-                else if(piles[i] % mid == 0)
-                {
-                    count += piles[i]/mid;
-                }
-                else
-                {
-                    count += piles[i]/mid + 1;
+                    temp++;
                 }
             }
-
-            if(count <= H)
+            
+            if(temp <= H)
             {
+                ans = mid;
                 e = mid-1;
             }
             else
             {
                 s = mid+1;
             }
-            count = 0;
-            mid = s + (e-s)/2;
         }
-        return mid;  
+        
+        return ans;
     }
 };
 
