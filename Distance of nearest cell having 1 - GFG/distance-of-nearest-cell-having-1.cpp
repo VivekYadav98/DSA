@@ -6,22 +6,12 @@ using namespace std;
 class Solution 
 {
     public:
-    bool safe(int i,int j,int n,int m)
-    {
-        if(i>=0 && i<n && j>=0 && j<m)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
     //Function to find distance of nearest 1 in the grid for each cell.
 	vector<vector<int>>nearest(vector<vector<int>>grid)
 	{
-	    int n = grid.size();
-	    int m = grid[0].size();
+	    int n = grid.size(),m = grid[0].size();
+	    vector<vector<int>>ans(n,vector<int>(m,INT_MAX));
+	    
 	    queue<pair<pair<int,int>,int>>q;
 	    for(int i=0;i<n;i++)
 	    {
@@ -29,49 +19,39 @@ class Solution
 	        {
 	            if(grid[i][j] == 1)
 	            {
-	                q.push({{i,j},0});
+    	            q.push({{i,j},0});
+    	            ans[i][j] = 0;
 	            }
 	        }
 	    }
 	    
-	    vector<vector<int>>ans(n,vector<int>(m,0));
-	    vector<vector<int>>visited(n,vector<int>(m,false));
-	    int count = 0;
-        
-        while(!q.empty())
-        {
-            count = q.front().second;
-            int size = q.size();
-            
-            for(int k=0;k<size;k++)
-            {
-                 int row = q.front().first.first;
-                 int col = q.front().first.second;
-                 q.pop();
-                 
-                 if(!visited[row][col])
-                 {
-                    visited[row][col] = true;
-                    ans[row][col] = count;
-                     
-                     
-                    int dr[] = {-1,0,1,0};
-                    int dc[] = {0,1,0,-1};
-                    
-                    for(int i=0;i<4;i++)
-                    {
-                        int newr = row+dr[i];
-                        int newc = col+dc[i];
-                        
-                        if(safe(newr,newc,n,m))
-                        {
-                            q.push({{newr,newc},count+1});
-                        }
-                    }
-                 }
-            }
-        }
-        return ans;
+	    int dr[4] = {-1,0,1,0};
+	    int dc[4] = {0,1,0,-1};
+	    
+	    while(!q.empty())
+	    {
+	        int size = q.size();
+	        for(int k=0;k<size;k++)
+	        {
+	            int row = q.front().first.first;
+    	        int col = q.front().first.second;
+    	        int cnt = q.front().second;
+    	        q.pop();
+    	        
+    	        for(int i=0;i<4;i++)
+    	        {
+    	            int newr = row+dr[i];
+    	            int newc = col+dc[i];
+    	            
+    	            if(newr>=0 && newr<n && newc>=0 && newc<m && ans[newr][newc] > cnt+1)
+    	            {
+    	                ans[newr][newc] = cnt+1;
+    	                q.push({{newr,newc},cnt+1});
+    	            }
+    	        }
+	        }
+	    }
+	    return ans;
 	}
 };
 
