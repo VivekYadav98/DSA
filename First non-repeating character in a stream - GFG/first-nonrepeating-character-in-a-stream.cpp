@@ -13,7 +13,7 @@ class Solution {
 		    
 		    while(i<s.length())
 		    {
-		        if((q.empty() && m[s[i]] < 1) || m[s[i]] < 1)
+		        if(m[s[i]] < 1)
 		        {
 		            q.push(s[i]);
 		        }
