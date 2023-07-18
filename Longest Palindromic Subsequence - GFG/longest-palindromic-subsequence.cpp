@@ -12,7 +12,7 @@ class Solution{
   public:
     int solve(int i,int j,string& s,string& t,vector<vector<int>>& dp)
     {
-        if(i==0 || j==0)
+        if(i<0 || j<0)
         {
             return 0;
         }
@@ -22,7 +22,7 @@ class Solution{
             return dp[i][j];
         }
         
-        if(s[i-1] == t[j-1])
+        if(s[i] == t[j])
         {
             return dp[i][j] = 1+solve(i-1,j-1,s,t,dp);
         }
@@ -37,7 +37,7 @@ class Solution{
         reverse(t.begin(),t.end());
         int n = A.length();
         vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
-        return solve(n,n,A,t,dp);
+        return solve(n-1,n-1,A,t,dp);
     }
 };
 
