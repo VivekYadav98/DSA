@@ -16,7 +16,7 @@ number in the array. Missing numbers are
 
 <p><span style="font-size:18px"><strong>Example 2:</strong></span></p>
 
-<pre><span style="font-size:18px"><strong>Input :</strong> arr[ ] = {1, 2, 3, 4, 5, 6} <strong>
+<pre><span style="font-size:18px"><strong>Input :</strong> arr[ ] = {1, 2, 3, 4, 5, 6} and K = 1<strong>
 Output :</strong>  -1 </span></pre>
 
 <p>&nbsp;</p>
