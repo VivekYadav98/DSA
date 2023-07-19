@@ -28,27 +28,24 @@ int main()
 // } Driver Code Ends
 
 
-int KthMissingElement(int a[], int n, int k)
+int KthMissingElement(int arr[], int n, int k)
 {
-     vector<int>temp;
-        int num = a[0];
-        for(int i=0;i<n;i++)
+    int cnt = 0;
+    int i=1;
+    
+    while(i<n)
+    {
+        while(arr[i-1]+1 != arr[i] && cnt<k)
         {
-            if(a[i] == num)
-            {
-                num++;
-            }
-            else
-            {
-                temp.push_back(num);
-                num++;
-                i--;
-            }
+            arr[i-1]++;
+            cnt++;
         }
         
-        if(temp.size() < k)
+        if(cnt == k)
         {
-            return -1;
+            return arr[i-1];
         }
-        return temp[k-1];
+        i++;
+    }
+    return -1;
 }
