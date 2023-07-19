@@ -9,11 +9,10 @@ using namespace std;
 class Solution {
   public:
     int leastWeightCapacity(int arr[], int N, int D) {
-        int low=INT_MAX,high=0,mid,ans=0,maxi=INT_MIN;
+        int low = 1,high=INT_MAX,mid,ans=0,maxi=INT_MIN;
         for(int i=0;i<N;i++)
         {
-            low = min(low,arr[i]);
-            high += arr[i];
+            
             maxi = max(maxi,arr[i]);
         }
         
