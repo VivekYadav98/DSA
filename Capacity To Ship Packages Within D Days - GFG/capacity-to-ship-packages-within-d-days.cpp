@@ -8,45 +8,48 @@ using namespace std;
 
 class Solution {
   public:
-    int leastWeightCapacity(int weights[], int N, int days) {
-        long long s=1,e=1e14,mid=s+(e-s)/2;
-        long long daysCnt = 0;
-
-        while(s<=e)
+    int leastWeightCapacity(int arr[], int N, int D) {
+        int low=INT_MAX,high=0,mid,ans=0,maxi=INT_MIN;
+        for(int i=0;i<N;i++)
         {
-            int sum=0;
+            low = min(low,arr[i]);
+            high += arr[i];
+            maxi = max(maxi,arr[i]);
+        }
+        
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+            
+            if(mid<maxi)
+            {
+                low = mid+1;
+                continue;
+            }
+            
+            int sum=0,days=1;
             for(int i=0;i<N;i++)
             {
-                if(weights[i] > mid)
-                {
-                    daysCnt = days+1;
-                }
-
-                sum += weights[i];
+                sum += arr[i];
+                
                 if(sum > mid)
                 {
-                    daysCnt++;
-                    sum = weights[i];
+                    days++;
+                    sum = arr[i];
                 }
             }
-
-            if(sum != 0)
+            
+            if(days <= D)
             {
-                daysCnt++;
-            }
-
-            if(daysCnt <= days)
-            {
-                e = mid-1;
+                ans = mid;
+                high = mid-1;
             }
             else
             {
-                s = mid+1;
+                low = mid+1;
             }
-            mid=s+(e-s)/2;
-            daysCnt = 0;
         }
-        return mid;
+        return ans;
     }
 };
 
