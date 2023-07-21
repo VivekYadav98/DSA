@@ -66,9 +66,11 @@ class Solution
             prev = temp;
             temp = curr;
             k--;
+            
+            restHead = curr;
         }
         
-        restHead = curr;
+        
         head->next = reverse(restHead,cnt);
         return prev;
     }
