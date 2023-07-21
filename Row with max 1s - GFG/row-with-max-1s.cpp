@@ -22,15 +22,15 @@ public:
 	        }
 	    }
 	   
-	    if(i>=n)
-	    {
-	        i--;
+	   // if(i>=n)
+	   // {
+	   //     i--;
 	        
-	        if(i==n-1 && j==m-1)
-	        {
-	            return -1;
-	        }
-	    }
+	   //     if(i==n-1 && j==m-1)
+	   //     {
+	   //         return -1;
+	   //     }
+	   // }
 	    
 	    return ans;
 	}
