@@ -6,27 +6,31 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  int solve(vector<int>& height,int ind,vector<int>& dp)
-  {
-      if(ind == 0) return 0;
-      
-      if(dp[ind] != -1)
-      {
-          return dp[ind];
-      }
-      
-      int step1 = solve(height,ind-1,dp) + abs(height[ind] - height[ind-1]);
-      int step2 = INT_MAX;
-      if(ind>1)
-      {
-          step2 = solve(height,ind-2,dp) + abs(height[ind] - height[ind-2]);
-      }
-      
-      return dp[ind] = min(step1,step2);
-  }
+    int solve(int i,vector<int>& arr,int n,vector<int>& dp)
+    {
+        if(i == n-1)
+        {
+            return 0;
+        }
+        
+        if(dp[i] != -1)
+        {
+            return dp[i];
+        }
+        
+        int ans = INT_MAX;
+        
+        for(int j=i+1;j<i+3 && j<n;j++)
+        {
+            int cost = abs(arr[i]-arr[j]) + solve(j,arr,n,dp);
+            ans = min(ans,cost);
+        }
+        return dp[i] = ans;
+    }
+    
     int minimumEnergy(vector<int>& height, int n) {
         vector<int>dp(n+1,-1);
-        return solve(height,n-1,dp);
+        return solve(0,height,n,dp);
     }
 };
 
