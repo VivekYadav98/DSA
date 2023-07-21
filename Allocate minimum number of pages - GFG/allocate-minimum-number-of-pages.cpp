@@ -25,7 +25,7 @@ class Solution
             }
         }
         
-        if(sum <= pages)
+        if(sum < pages)
         {
             cnt++;
         }
