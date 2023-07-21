@@ -30,7 +30,7 @@ class Solution
             cnt++;
         }
             
-        if(cnt <= m && sum <= pages)
+        if(cnt <= m)
         {
             return true;
         }
