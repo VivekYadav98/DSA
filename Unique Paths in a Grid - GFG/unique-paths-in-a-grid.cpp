@@ -9,14 +9,14 @@ using namespace std;
 class Solution {
   public:
     int mod = 1e9+7;
-    int solve(int i,int j,vector<vector<int>> &grid,vector<vector<int>>& dp)
+    int solve(int i,int j,int n,int m,vector<vector<int>>& grid,vector<vector<int>>& dp)
     {
-        if(i<0 || j<0 || grid[i][j] == 0)
+        if(i>=n || j>=m || grid[i][j] == 0)
         {
             return 0;
         }
         
-        if(i==0 && j==0)
+        if(i == n-1 && j == m-1)
         {
             return 1;
         }
@@ -25,13 +25,15 @@ class Solution {
         {
             return dp[i][j];
         }
-        int up = solve(i-1,j,grid,dp);
-        int left = solve(i,j-1,grid,dp);
-        return dp[i][j] = (up+left)%mod;
+        
+        int right = solve(i,j+1,n,m,grid,dp);
+        int down = solve(i+1,j,n,m,grid,dp);
+        return dp[i][j] = (right%mod+down%mod)%mod;
     }
+    
     int uniquePaths(int n, int m, vector<vector<int>> &grid) {
-        vector<vector<int>>dp(n,vector<int>(m,-1));
-        return solve(n-1,m-1,grid,dp);
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        return solve(0,0,n,m,grid,dp);
     }
 };
 
