@@ -1,5 +1,5 @@
 # Unique Paths in a Grid
-## Easy
+## Medium
 <div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">You are given a matrix <strong>grid</strong> of&nbsp;<strong>n</strong> x&nbsp; <strong>m</strong> size consisting of values <strong>0</strong> and <strong>1</strong>. A value of <strong>1</strong> means that you can enter that cell and <strong>0</strong> implies that entry to that cell is not allowed. </span></p>
 
 <p><span style="font-size:18px">You start at the upper-left corner of the grid <strong>(1, 1)</strong> and you have to reach the bottom-right corner <strong>(n, m)</strong> such that you can only move in the right or down direction from every cell. </span></p>
