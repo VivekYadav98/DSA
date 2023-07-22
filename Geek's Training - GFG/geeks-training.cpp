@@ -5,40 +5,33 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  int solve(int day,int last,vector<vector<int>>& points,vector<vector<int>>& dp)
-  {
-      if(day == 0)
-      {
-          int maxi = 0;
-          for(int task=0;task<3;task++)
-          {
-              if(task != last)
-              {
-                  maxi = max(maxi,points[day][task]);
-              }
-          }
-          return maxi;
-      }
-      
-      if(dp[day][last] != -1)
-      {
-          return dp[day][last];
-      }
-      
-      int maxi = 0;
-      for(int task=0;task<3;task++)
-      {
-          if(task != last)
-          {
-              maxi = max(maxi , points[day][task] + solve(day-1,task,points,dp));
-          }
-      }
-      return dp[day][last] = maxi;
-  }
-  
+    int solve(int i,int prev,vector<vector<int>>& points,vector<vector<int>>& dp)
+    {
+        if(i>=points.size())
+        {
+            return 0;
+        }
+        
+        if(dp[i][prev+1] != -1)
+        {
+            return dp[i][prev+1];
+        }
+        
+        int ans = 0;
+        for(int j=0;j<3;j++)
+        {
+            if(j != prev)
+            {
+                ans = max(ans , points[i][j] + solve(i+1,j,points,dp));
+            }
+        }
+        
+        return dp[i][prev+1] = ans;
+    }
+    
     int maximumPoints(vector<vector<int>>& points, int n) {
-        vector<vector<int>>dp(n,vector<int>(4,-1));
-        return solve(n-1,3,points,dp);
+        vector<vector<int>>dp(n+1,vector<int>(4,-1));
+        return solve(0,-1,points,dp);
     }
 };
 
