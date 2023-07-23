@@ -17,12 +17,6 @@ class Solution {
             return 1e8;
         }
         
-        int m = triangle[i].size();
-        if(j>=m)
-        {
-            return 1e8;
-        }
-        
         if(dp[i][j] != -1)
         {
             return dp[i][j];
