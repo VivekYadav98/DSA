@@ -9,16 +9,11 @@ using namespace std;
 
 class Solution{
 public:
-    int solve(int i,int j,vector<vector<int>>& matrix,int N,vector<vector<int>>& dp)
+    int solve(int i,int j,int n,vector<vector<int>>& matrix,vector<vector<int>>& dp)
     {
-        if(i<0 || j<0 || i>=N || j>=N)
+        if(i>=n || j>=n || j<0)
         {
-            return INT_MIN;
-        }
-        
-        if(i==0)
-        {
-            return matrix[i][j];
+            return 0;
         }
         
         if(dp[i][j] != -1)
@@ -26,22 +21,21 @@ public:
             return dp[i][j];
         }
         
-        int cost1 = matrix[i][j] + solve(i-1,j,matrix,N,dp);
-        int cost2 = matrix[i][j] + solve(i-1,j+1,matrix,N,dp);
-        int cost3 = matrix[i][j] + solve(i-1,j-1,matrix,N,dp);
-        
-        return dp[i][j] = max(cost1,max(cost2,cost3));
+        int ans1 = matrix[i][j] + solve(i+1,j,n,matrix,dp);
+        int ans2 = matrix[i][j] + solve(i+1,j-1,n,matrix,dp);
+        int ans3 = matrix[i][j] + solve(i+1,j+1,n,matrix,dp);
+        return dp[i][j] = max(ans1,max(ans2,ans3));
     }
-
+    
     int maximumPath(int N, vector<vector<int>> Matrix)
     {
         vector<vector<int>>dp(N+1,vector<int>(N+1,-1));
-        int ans = 0;
+        int ans = INT_MIN;
         for(int i=0;i<N;i++)
         {
-            int cost = solve(N-1,i,Matrix,N,dp);
-            ans = max(ans,cost);
+            ans = max(ans,solve(0,i,N,Matrix,dp));
         }
+        
         return ans;
     }
 };
