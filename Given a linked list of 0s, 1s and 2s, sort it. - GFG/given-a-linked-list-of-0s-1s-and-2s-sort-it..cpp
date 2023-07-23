@@ -34,45 +34,43 @@ class Solution
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) {
-       int cnt0=0,cnt1=0,cnt2=0;
-       while(head != NULL)
-       {
-           if(head->data == 0)
-           {
-               cnt0++;
-           }
-           else if(head->data == 1)
-           {
-               cnt1++;
-           }
-           else
-           {
-               cnt2++;
-           }
-           head = head->next;
-       }
-       
-       Node* ans = new Node(-1);
-       Node* tail = ans;
-       while(cnt0>0)
-       {
-           tail->next = new Node(0);
-           tail = tail->next;
-           cnt0--;
-       }
-       while(cnt1>0)
-       {
-           tail->next = new Node(1);
-           tail = tail->next;
-           cnt1--;
-       }
-       while(cnt2>0)
-       {
-           tail->next = new Node(2);
-           tail = tail->next;
-           cnt2--;
-       }
-       return ans->next;
+      vector<int>arr;
+      
+      while(head != NULL)
+      {
+          arr.push_back(head->data);
+          head = head->next;
+      }
+      
+      int low=0,mid=0,high=arr.size()-1;
+      
+      while(mid<=high)
+      {
+          if(arr[mid] == 0)
+          {
+              swap(arr[low],arr[mid]);
+              low++;
+              mid++;
+          }
+          else if(arr[mid] == 2)
+          {
+              swap(arr[mid],arr[high]);
+              high--;
+          }
+          else
+          {
+              mid++;
+          }
+      }
+      
+      Node* ans = new Node(-1);
+      Node* tail = ans;
+      for(auto i:arr)
+      {
+          tail->next = new Node(i);
+          tail = tail->next;
+      }
+      return ans->next;
     }
 };
 
