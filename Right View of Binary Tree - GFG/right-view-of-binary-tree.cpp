@@ -40,27 +40,28 @@ struct Node
 class Solution
 {
     public:
-    void solve(Node* root,vector<int>& ans,int level)
-{
-    if(root == NULL)
+    void solve(Node* root,int level,vector<int>& ans)
     {
-        return;
+        if(root == NULL)
+        {
+            return;
+        }
+        
+        if(level == ans.size())
+        {
+            ans.push_back(root->data);
+        }
+        
+        solve(root->right,level+1,ans);
+        solve(root->left,level+1,ans);
     }
     
-    if(level == ans.size())
-    {
-        ans.push_back(root->data);
-    }
-    
-    solve(root->right,ans,level+1);
-    solve(root->left,ans,level+1);
-}
-
+    //Function to return list containing elements of right view of binary tree.
     vector<int> rightView(Node *root)
     {
-      vector<int>ans;
-   solve(root,ans,0);
-   return ans;
+       vector<int>ans;
+       solve(root,0,ans);
+       return ans;
     }
 };
 
