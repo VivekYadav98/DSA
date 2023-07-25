@@ -9,61 +9,37 @@ using namespace std;
 
 class Solution{   
 public:
-    bool solve(int ind,int target,vector<int>& arr,vector<vector<int>>& dp)
-	{
-	    if(target = 0)
-	    {
-	        return true;
-	    }
-	    
-	    if(ind == 0)
-	    {
-	        return (target == arr[0]);
-	    }
-	    
-	    if(dp[ind][target] != -1)
-	    {
-	        return dp[ind][target];
-	    }
-	    
-	    bool left = solve(ind-1,target,arr,dp);
-	    bool right = false;
-	    
-	    if(target >= arr[ind])
-	    {
-	      right = solve(ind-1,target-arr[ind],arr,dp);
-	    }
-	    
-	    return dp[ind][target] = left | right;
-	}
-	
-	
-    bool isSubsetSum(vector<int>arr, int sum){
-        int n = arr.size();
-        vector<vector<bool>>dp(n,vector<bool>(sum+1,false));
-        
-        for(int ind=0;ind<n;ind++)
+    int solve(int i,int sum,vector<int>& arr,vector<vector<int>>& dp)
+    {
+        if(sum == 0)
         {
-            dp[ind][0] = true;
+            return 1;
         }
-        dp[0][arr[0]] = true;
         
-        for(int ind=1;ind<n;ind++)
+        if(sum<0 || i>=arr.size())
         {
-            for(int target=1;target<=sum;target++)
+            return 0;
+        }
+        
+        if(dp[i][sum] != -1)
+        {
+            return dp[i][sum];
+        }
+        
+        if(sum >= arr[i])
+        {
+            if(solve(i+1,sum-arr[i],arr,dp))
             {
-                bool notPick = dp[ind-1][target];
-        	    bool pick = false;
-        	    
-        	    if(target >= arr[ind])
-        	    {
-        	      pick = dp[ind-1][target-arr[ind]];
-        	    }
-        	    
-        	    dp[ind][target] = pick | notPick;
+                return dp[i][sum] = 1;
             }
         }
-        return dp[n-1][sum];
+        
+        return dp[i][sum] = solve(i+1,sum,arr,dp);
+    }
+    
+    bool isSubsetSum(vector<int>arr, int sum){
+        vector<vector<int>>dp(arr.size()+1,vector<int>(sum+1,-1));
+        return solve(0,sum,arr,dp);
     }
 };
 
