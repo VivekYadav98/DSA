@@ -7,55 +7,34 @@ using namespace std;
 class Solution
 {
     public:
-    int solve(int ind,int W,int wt[],int val[],vector<vector<int>>& dp)
+    int solve(int i,int val[],int wt[],int cap,int n,vector<vector<int>>& dp)
     {
-        if(ind == 0)
+        if(cap == 0 || i>=n)
         {
-            if(wt[0] <= W)
-            {
-                return val[0];
-            }
-            else return 0;
+            return 0;
         }
         
-        if(dp[ind][W] != -1)
+        if(dp[i][cap] != -1)
         {
-            return dp[ind][W];
+            return dp[i][cap];
         }
         
-        int notPick = 0 + solve(ind-1,W,wt,val,dp);
-        int pick = INT_MIN;
-        if(wt[ind] <= W)
+        int take = 0;
+        if(cap>=wt[i])
         {
-            pick = val[ind] + solve(ind-1,W-wt[ind],wt,val,dp);
+            take = val[i] + solve(i+1,val,wt,cap-wt[i],n,dp);
         }
-        return dp[ind][W] = max(pick,notPick);
+        
+        int notTake = solve(i+1,val,wt,cap,n,dp);
+        
+        return dp[i][cap] = max(take,notTake);
     }
+    
     //Function to return max value that can be put in knapsack of capacity W.
     int knapSack(int W, int wt[], int val[], int n) 
     { 
-       vector<int>prev(W+1,0),curr(W+1,0);
-       
-       for(int w=wt[0];w<=W;w++)
-       {
-           prev[w] = val[0];
-       }
-       
-       for(int ind=1;ind<n;ind++)
-       {
-           for(int w=0;w<=W;w++)
-           {
-               int notPick = 0 + prev[w];
-               int pick = INT_MIN;
-                if(wt[ind] <= w)
-                {
-                    pick = val[ind] + prev[w-wt[ind]];
-                }
-                curr[w] = max(pick,notPick);
-           }
-           prev = curr;
-       }
-       return prev[W];
+       vector<vector<int>>dp(n+1,vector<int>(W+1,-1));
+       return solve(0,val,wt,W,n,dp);
     }
 };
 
