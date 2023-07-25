@@ -129,56 +129,54 @@ struct Node
 //Function to return a list containing the level order traversal in spiral form.
 vector<int> findSpiral(Node *root)
 {
-    if(root == NULL)
+    vector<int>ans;
+    queue<Node*>q;
+    int level = 0;
+    q.push(root);
+    
+    while(!q.empty())
     {
-        return {};
+        level++;
+        int size = q.size();
+        
+        vector<int>temp;
+        for(int i=0;i<size;i++)
+        {
+            Node* front = q.front();
+            q.pop();
+            
+            temp.push_back(front->data);
+            
+            if(front->left)
+            {
+                q.push(front->left);
+            }
+            
+            if(front->right){
+                q.push(front->right);
+            }
+        }
+        
+        int j=0,n=temp.size();
+        if(level%2 != 0)
+        {
+            j = n-1;
+        }
+        
+        if(j == 0)
+        {
+            while(j<n)
+            {
+                ans.push_back(temp[j++]);
+            }
+        }
+        else
+        {
+            while(j>=0)
+            {
+                ans.push_back(temp[j--]);
+            }
+        }
     }
-   vector<int>ans;
-   queue<Node*>q;
-   q.push(root);
-   int level = 0;
-   
-   while(!q.empty())
-   {
-       level++;
-       int size = q.size();
-       
-       vector<int>temp;
-       for(int i=0;i<size;i++)
-       {
-           Node* node = q.front();
-           q.pop();
-           
-           temp.push_back(node->data);
-           
-           if(node->left)
-           {
-               q.push(node->left);
-           }
-           if(node->right)
-           {
-               q.push(node->right);
-           }
-       }
-       
-       if(level%2 == 0)
-       {
-           int j=0;
-           while(j<temp.size())
-           {
-               ans.push_back(temp[j]);
-               j++;
-           }
-       }
-       else
-       {
-           int j = temp.size()-1;
-           while(j>=0)
-           {
-               ans.push_back(temp[j]);
-               j--;
-           }
-       }
-   }
-   return ans;
+    return ans;
 }
