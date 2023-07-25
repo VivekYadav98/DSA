@@ -7,37 +7,42 @@ class Solution{
 
 	public:
 	int mod = 1e9+7;
-	int solve(int i,int n,int sum,int arr[],vector<vector<int>>& dp)
-	{
-	    if(i>=n)
-	    {
-	        return 0;
-	    }
-	    
-	    if(dp[i][sum] != -1)
-	    {
-	        return dp[i][sum]%mod;
-	    }
-	    
-	    int pick = 0;
-	    if(sum >= arr[i])
-	    {
-	        if(sum == arr[i])
-	        {
-	            pick++;
-	        }
-	        pick += solve(i+1,n,sum-arr[i],arr,dp);
-	        pick = pick%mod;
-	    }
-	    
-	    int notPick = solve(i+1,n,sum,arr,dp);
-	    return dp[i][sum] = (pick+notPick)%mod;
-	}
+	
+	int solve(int i,int sum,int arr[],int n,vector<vector<int>>& dp)
+    {
+        if(sum<0)
+        {
+            return 0;
+        }
+        
+        if(sum == 0 && i<n && arr[i] == 0)
+        {
+            return 2;
+        }
+        else if(sum == 0)
+        {
+            return 1;
+        }
+        
+        if(i>=n)
+        {
+            return 0;
+        }
+        
+        if(dp[i][sum] != -1)
+        {
+            return dp[i][sum];
+        }
+        
+        int ans1 = solve(i+1,sum-arr[i],arr,n,dp);
+        int ans2 = solve(i+1,sum,arr,n,dp);
+        return dp[i][sum] = ((ans1)%mod+(ans2)%mod)%mod;
+    }
 	
 	int perfectSum(int arr[], int n, int sum)
 	{
 	    vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
-       return solve(0,n,sum,arr,dp)%mod;
+        return solve(0,sum,arr,n,dp);
 	}
 	  
 };
