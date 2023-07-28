@@ -46,12 +46,7 @@ class Solution{
            {
                return lca1;
            }
-           else
-           {
-               return NULL;
-           }
         }
-
 };
 
 
